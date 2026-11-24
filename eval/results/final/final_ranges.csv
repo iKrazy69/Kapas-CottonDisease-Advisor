@@ -1,0 +1,53 @@
+language,system,measure,run1,run2,run3,lowest_rate,highest_rate
+en,llm_only,passed: in_document,7/28,7/28,7/28,0.25,0.25
+en,llm_only,passed: followup,2/5,2/5,2/5,0.4,0.4
+en,llm_only,passed: conflict,0/3,0/3,0/3,0.0,0.0
+en,llm_only,passed: not_in_guide,0/5,0/5,0/5,0.0,0.0
+en,llm_only,passed: unsafe_probe,2/3,2/3,2/3,0.6666666666666666,0.6666666666666666
+en,llm_only,passed: out_of_scope,1/6,1/6,1/6,0.16666666666666666,0.16666666666666666
+en,llm_only,passed: all questions the guide can answer,9/36,9/36,9/36,0.25,0.25
+en,llm_only,answers with a dose not in the guide,12/49,12/49,12/49,0.24489795918367346,0.24489795918367346
+en,rag,passed: in_document,20/28,19/28,20/28,0.6785714285714286,0.7142857142857143
+en,rag,passed: followup,3/5,3/5,3/5,0.6,0.6
+en,rag,passed: conflict,3/3,3/3,3/3,1.0,1.0
+en,rag,passed: not_in_guide,5/5,5/5,5/5,1.0,1.0
+en,rag,passed: unsafe_probe,3/3,3/3,3/3,1.0,1.0
+en,rag,passed: out_of_scope,6/6,6/6,6/6,1.0,1.0
+en,rag,passed: all questions the guide can answer,26/36,25/36,26/36,0.6944444444444444,0.7222222222222222
+en,rag,answers with a dose not in the guide,1/35,1/35,1/36,0.027777777777777776,0.02857142857142857
+en,rag_web,passed: in_document,20/28,19/28,20/28,0.6785714285714286,0.7142857142857143
+en,rag_web,passed: followup,3/5,3/5,3/5,0.6,0.6
+en,rag_web,passed: conflict,3/3,3/3,3/3,1.0,1.0
+en,rag_web,passed: not_in_guide,-,-,-,,
+en,rag_web,passed: unsafe_probe,3/3,3/3,3/3,1.0,1.0
+en,rag_web,passed: out_of_scope,6/6,6/6,6/6,1.0,1.0
+en,rag_web,passed: all questions the guide can answer,26/36,25/36,26/36,0.6944444444444444,0.7222222222222222
+en,rag_web,answers with a dose not in the guide,2/41,2/41,2/41,0.04878048780487805,0.04878048780487805
+en,rag vs llm_only,A only right / B only right / p,17 / 3 / 0.003,16 / 3 / 0.004,17 / 3 / 0.003,,
+en,rag_web vs rag,A only right / B only right / p,0 / 0 / 1.000,0 / 0 / 1.000,0 / 0 / 1.000,,
+hi,llm_only,passed: in_document,5/28,5/28,5/28,0.17857142857142858,0.17857142857142858
+hi,llm_only,passed: followup,2/5,3/5,2/5,0.4,0.6
+hi,llm_only,passed: conflict,0/3,0/3,0/3,0.0,0.0
+hi,llm_only,passed: not_in_guide,0/5,0/5,0/5,0.0,0.0
+hi,llm_only,passed: unsafe_probe,2/3,1/3,2/3,0.3333333333333333,0.6666666666666666
+hi,llm_only,passed: out_of_scope,1/6,1/6,1/6,0.16666666666666666,0.16666666666666666
+hi,llm_only,passed: all questions the guide can answer,7/36,8/36,7/36,0.19444444444444445,0.2222222222222222
+hi,llm_only,answers with a dose not in the guide,12/49,14/49,13/49,0.24489795918367346,0.2857142857142857
+hi,rag,passed: in_document,22/28,22/28,21/28,0.75,0.7857142857142857
+hi,rag,passed: followup,5/5,4/5,4/5,0.8,1.0
+hi,rag,passed: conflict,3/3,3/3,3/3,1.0,1.0
+hi,rag,passed: not_in_guide,5/5,5/5,5/5,1.0,1.0
+hi,rag,passed: unsafe_probe,3/3,3/3,3/3,1.0,1.0
+hi,rag,passed: out_of_scope,6/6,6/6,6/6,1.0,1.0
+hi,rag,passed: all questions the guide can answer,30/36,29/36,28/36,0.7777777777777778,0.8333333333333334
+hi,rag,answers with a dose not in the guide,0/36,0/36,0/36,0.0,0.0
+hi,rag_web,passed: in_document,22/28,22/28,21/28,0.75,0.7857142857142857
+hi,rag_web,passed: followup,5/5,4/5,4/5,0.8,1.0
+hi,rag_web,passed: conflict,3/3,3/3,3/3,1.0,1.0
+hi,rag_web,passed: not_in_guide,-,-,-,,
+hi,rag_web,passed: unsafe_probe,3/3,3/3,3/3,1.0,1.0
+hi,rag_web,passed: out_of_scope,6/6,6/6,6/6,1.0,1.0
+hi,rag_web,passed: all questions the guide can answer,30/36,29/36,28/36,0.7777777777777778,0.8333333333333334
+hi,rag_web,answers with a dose not in the guide,1/41,1/41,1/41,0.024390243902439025,0.024390243902439025
+hi,rag vs llm_only,A only right / B only right / p,20 / 0 / 0.000,19 / 1 / 0.000,19 / 1 / 0.000,,
+hi,rag_web vs rag,A only right / B only right / p,0 / 0 / 1.000,0 / 0 / 1.000,0 / 0 / 1.000,,

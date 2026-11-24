@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VB-GRAMG - Voice RAG Assistant</title>
+
+    <link rel="stylesheet" href="chat-style.css">
+
+    <style>
+        /* Custom styles just for our Voice features to match your theme */
+        .btn-voice {
+            padding: 10px 24px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-voice:hover {
+            background: #15803d;
+            transform: translateY(-1px);
+        }
+
+        .btn-voice:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-voice.recording {
+            background: #dc2626;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .input-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .message-sources {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>🏛️ VB-GRAMG Voice Assistant</h1>
+                <p>Multilingual Government Documents RAG System</p>
+            </div>
+            <div class="header-user">
+                <span class="user-name">Live Demo Mode</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="chat-wrapper">
+
+            <div class="messages-area" id="messagesArea">
+                <div class="welcome-message">
+                    <h2>Welcome! 👋</h2>
+                    <p>Ask any question about government guidelines in English or Hindi.</p>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <form class="message-form" id="chatForm">
+                    <textarea class="message-input" id="questionInput"
+                        placeholder="Type your question here or click Voice to speak..." rows="2"></textarea>
+
+                    <div class="input-actions">
+                        <button type="button" id="voiceBtn" class="btn-voice">🎤 Start Voice</button>
+                        <button type="submit" id="sendBtn" class="btn-send">Send Text</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const TEXT_API_URL = 'http://127.0.0.1:8080/api/query';
+        const VOICE_API_URL = 'http://127.0.0.1:8080/api/voice-query';
+
+        const messagesArea = document.getElementById('messagesArea');
+        const chatForm = document.getElementById('chatForm');
+        const questionInput = document.getElementById('questionInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const voiceBtn = document.getElementById('voiceBtn');
+
+        let isRecording = false;
+        let mediaRecorder = null;
+        let audioChunks = [];
+
+        // --- PIPER BACKEND TEXT-TO-SPEECH ---
+        function playAudioResponse(audioUrl) {
+            if (!audioUrl) return;
+
+            // Create an HTML5 Audio object and play the URL sent by the backend
+            const audio = new Audio(audioUrl);
+            audio.play().catch(e => console.error("Error playing audio:", e));
+        }
+
+        // --- WHISPER BACKEND INTEGRATION ---
+        voiceBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
+
+                    mediaRecorder.onstop = async () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        await sendVoiceToBackend(audioBlob);
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    voiceBtn.innerHTML = '⏹️ Stop Recording';
+                    voiceBtn.classList.add('recording');
+
+                } catch (error) {
+                    console.error('Microphone access denied:', error);
+                    alert('Please allow microphone access in your browser settings.');
+                }
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                voiceBtn.innerHTML = '🎤 Start Voice';
+                voiceBtn.classList.remove('recording');
+            }
+        });
+
+        async function sendVoiceToBackend(audioBlob) {
+            removeWelcome();
+            voiceBtn.disabled = true;
+            sendBtn.disabled = true;
+            voiceBtn.innerHTML = '⚙️ Transcribing...';
+
+            try {
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'voice.wav');
+
+                const response = await fetch(VOICE_API_URL, { method: 'POST', body: formData });
+                const data = await response.json();
+
+                if (data.success) {
+                    addMessage(`🎤 ${data.question}`, 'user');
+                    addMessage(data.response, 'assistant', data.source_documents);
+
+                    // Play the Piper audio file!
+                    if (data.audio_url) {
+                        playAudioResponse(data.audio_url);
+                    }
+                } else {
+                    // This block will catch the "Please speak only in English or Hindi" error
+                    addMessage(data.error || 'Failed to process voice.', 'assistant');
+                }
+            } catch (error) {
+                addMessage('Error connecting to backend.', 'assistant');
+            } finally {
+                voiceBtn.disabled = false;
+                sendBtn.disabled = false;
+                voiceBtn.innerHTML = '🎤 Start Voice';
+            }
+        }
+
+        // --- STANDARD TEXT CHAT ---
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const question = questionInput.value.trim();
+            if (!question) return;
+
+            removeWelcome();
+            addMessage(question, 'user');
+            questionInput.value = '';
+
+            sendBtn.disabled = true;
+            voiceBtn.disabled = true;
+            sendBtn.textContent = 'Thinking...';
+
+            try {
+                const response = await fetch(TEXT_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question, language: 'en', top_k: 5 })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    addMessage(data.response, 'assistant', data.source_documents);
+                    if (data.audio_url) {
+                        playAudioResponse(data.audio_url);
+                    }
+                } else {
+                    addMessage(data.error || 'Server error', 'assistant');
+                }
+            } catch (error) {
+                addMessage('Error connecting to server.', 'assistant');
+            } finally {
+                sendBtn.disabled = false;
+                voiceBtn.disabled = false;
+                sendBtn.textContent = 'Send Text';
+            }
+        });
+
+        // --- UI HELPERS ---
+        function removeWelcome() {
+            const welcome = messagesArea.querySelector('.welcome-message');
+            if (welcome) welcome.remove();
+        }
+
+        function addMessage(text, role, sources = []) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            let content = `<div class="message-content">${escapeHtml(text)}`;
+
+            // Add Document Citations if available
+            if (role === 'assistant' && sources && sources.length > 0) {
+                content += `<div class="message-sources">📚 Sources: ${sources.join(', ')}</div>`;
+            }
+
+            content += '</div>';
+            messageDiv.innerHTML = content;
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Let user press Enter to send text
+        questionInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+
+</html>

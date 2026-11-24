@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kapas | Cotton leaf and crop advisor</title>
+<meta name="description" content="Kapas checks a photo of a cotton leaf and answers questions only from the ICAR-CICR guide, with its sources named. English and Hindi.">
+<meta name="theme-color" content="#0D1640">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231D2B6B'/%3E%3Cpath d='M7.5 17c1 6 4.500 9 8.500 9.500 4-.5 7.500-3.500 8.500-9.500-3.500 3-13.500 3-17 0z' fill='%2344a574'/%3E%3Ccircle cx='12' cy='14' r='4.700' fill='%23fff'/%3E%3Ccircle cx='20' cy='14' r='4.700' fill='%23fff'/%3E%3Ccircle cx='16' cy='10.200' r='5' fill='%23fff'/%3E%3Ccircle cx='16' cy='15' r='4.800' fill='%23fff'/%3E%3C/svg%3E">
+<script>
+try{var th=localStorage.getItem('kapas.theme');if(th==='dark'||th==='light')document.documentElement.dataset.theme=th;}catch(e){}
+document.documentElement.classList.add('js');
+</script>
+<link rel="preload" href="fonts/Gloock-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="kapas.css">
+</head>
+<body>
+<a class="skip" href="#advisor">Skip to the advisor</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo" viewBox="0 0 32 32">
+      <rect width="32" height="32" rx="9" fill="#1D2B6B"/>
+      <path d="M7.5 17c1 6 4.5 9 8.5 9.5 4-.5 7.5-3.5 8.5-9.5-3.5 3-13.5 3-17 0z" fill="#44A574"/>
+      <circle cx="12" cy="14" r="4.7" fill="#fff"/><circle cx="20" cy="14" r="4.7" fill="#fff"/>
+      <circle cx="16" cy="10.2" r="5" fill="#fff"/><circle cx="16" cy="15" r="4.8" fill="#fff"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.200z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11.500" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.500 11.500a6.500 6.500 0 0 0 13 0M12 18v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.500" y="6.500" width="11" height="11" rx="2.500" fill="currentColor"/></symbol>
+    <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8.500h3l1.600-2.500h6.800L17 8.500h3v10.500H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13.500" r="3.400" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-img" viewBox="0 0 24 24"><rect x="3.500" y="4.500" width="17" height="15" rx="2.500" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.700" fill="currentColor"/><path d="M4 17l5-4.500 3.500 3 3-2.500 4.500 4" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-7-6 15-2.500-6.500z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <filter id="fuzz" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="brand" href="#hero" aria-label="Kapas, back to the top">
+      <svg class="logo" width="42" height="42" aria-hidden="true"><use href="#logo"/></svg>
+      <span class="wm" aria-hidden="true"><i style="--n:0">K</i><i style="--n:1">a</i><i style="--n:2">p</i><i style="--n:3">a</i><i style="--n:4">s</i></span><span class="wm-hi" lang="hi" aria-hidden="true">कपास</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#advisor">Advisor</a>
+      <a href="#how">How it works</a>
+      <a href="#cotton">Cotton</a>
+      <a href="#season">Seasons</a>
+      <a href="#history">History</a>
+      <a href="#diseases">Diseases</a>
+    </nav>
+    <div class="top-actions">
+      <button id="themeBtn" class="icon-btn" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+        <svg class="ic ic-sun" width="20" height="20" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="ic ic-moon" width="20" height="20" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+        <span class="bars" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero" aria-labelledby="heroTitle">
+  <div class="hero-weave" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <h1 id="heroTitle" class="h1">Show a leaf.<br>Get an answer you can trace.</h1>
+      <p class="hero-sub">Kapas checks a photo of a cotton leaf, answers from the ICAR-CICR guide, names its sources, and says so when it is not sure.</p>
+      <div class="hero-cta">
+        <a class="btn primary lg" href="#advisor" data-jump>Check a leaf</a>
+        <a class="btn ghost lg" href="#diseases" data-jump>Browse diseases</a>
+      </div>
+      <ul class="hero-facts">
+        <li>Answers only from the guide loaded on this computer</li>
+        <li>Every answer names its source</li>
+        <li>English and Hindi, typed or spoken</li>
+      </ul>
+    </div>
+
+    <div class="hero-art" id="heroArt" aria-hidden="true">
+      <!-- plant:start --><svg viewBox="0 0 520 690" class="plant" focusable="false"><defs>
+<radialGradient id="gLa" cx=".36" cy=".30" r=".80"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#F8FAFE"/><stop offset="1" stop-color="#D5E0F1"/></radialGradient>
+<radialGradient id="gLb" cx=".36" cy=".30" r=".80"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#EEF3FB"/><stop offset="1" stop-color="#C0CFE8"/></radialGradient>
+<radialGradient id="gLc" cx=".36" cy=".30" r=".80"><stop offset="0" stop-color="#F6F9FD"/><stop offset=".5" stop-color="#E0E9F6"/><stop offset="1" stop-color="#A6B9DA"/></radialGradient>
+<radialGradient id="gLd" cx=".36" cy=".30" r=".80"><stop offset="0" stop-color="#E7EEF8"/><stop offset=".5" stop-color="#C8D6EC"/><stop offset="1" stop-color="#8CA2CB"/></radialGradient>
+<linearGradient id="gValve" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#3A2514"/><stop offset=".55" stop-color="#6F4A2A"/><stop offset="1" stop-color="#A27A4A"/></linearGradient>
+<linearGradient id="gBract" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3DA06C"/><stop offset="1" stop-color="#1B5E3E"/></linearGradient>
+<radialGradient id="gBody" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#8ED79F"/><stop offset=".55" stop-color="#3E9A66"/><stop offset="1" stop-color="#1D6443"/></radialGradient>
+<linearGradient id="gLeafF" x1=".15" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#1D754B"/><stop offset=".5" stop-color="#3FA270"/><stop offset="1" stop-color="#8FDAA8"/></linearGradient>
+<linearGradient id="gLeafB" x1=".15" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#12462F"/><stop offset=".55" stop-color="#1D6B46"/><stop offset="1" stop-color="#3E9669"/></linearGradient>
+<linearGradient id="gStem" gradientUnits="userSpaceOnUse" x1="0" y1="654" x2="0" y2="250"><stop offset="0" stop-color="#6B5232"/><stop offset=".4" stop-color="#5E8A48"/><stop offset="1" stop-color="#4FAA72"/></linearGradient>
+<linearGradient id="gBranch" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5E8A48"/><stop offset="1" stop-color="#46A06A"/></linearGradient>
+<radialGradient id="gPetalShade" cx=".5" cy="1" r=".9"><stop offset="0" stop-color="rgba(150,40,90,.34)"/><stop offset=".5" stop-color="rgba(150,40,90,.06)"/><stop offset="1" stop-color="rgba(150,40,90,0)"/></radialGradient>
+<radialGradient id="gSun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="rgba(120,150,255,.34)"/><stop offset=".62" stop-color="rgba(96,124,236,.12)"/><stop offset="1" stop-color="rgba(96,124,236,0)"/></radialGradient>
+<radialGradient id="gHalo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="rgba(190,205,255,.30)"/><stop offset=".6" stop-color="rgba(160,180,255,.09)"/><stop offset="1" stop-color="rgba(160,180,255,0)"/></radialGradient>
+<linearGradient id="gSoil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B3A63"/><stop offset="1" stop-color="#171E4A"/></linearGradient>
+<g id="leafF"><path d="M0 0C-6.2 -19.9 -26.3 -24.1 -52.4 -13.1C-34.5 8.9 -14.8 14.7 0 0ZM0 0C10.3 -27.8 -8.9 -50.4 -48 -61.5C-46.8 -20.9 -29.5 3.2 0 0ZM0 0C28.4 -19.2 27 -55.7 0 -96C-27 -55.7 -28.4 -19.2 0 0ZM0 0C29.5 3.2 46.8 -20.9 48 -61.5C8.9 -50.4 -10.3 -27.8 0 0ZM0 0C14.8 14.7 34.5 8.9 52.4 -13.1C26.3 -24.1 6.2 -19.9 0 0Z" fill="url(#gLeafF)"/><path d="M0 0C-6.2 -19.9 -26.3 -24.1 -52.4 -13.1ZM0 0C10.3 -27.8 -8.9 -50.4 -48 -61.5ZM0 0C28.4 -19.2 27 -55.7 0 -96ZM0 0C29.5 3.2 46.8 -20.9 48 -61.5ZM0 0C14.8 14.7 34.5 8.9 52.4 -13.1Z" fill="rgba(0,28,14,.17)"/><path d="M0 0L-46.1 -11.5M-16.8 -4.2L-21.4 -14.8M-16.8 -4.2L-25.8 3M-26.2 -6.5L-31 -16.4M-26.2 -6.5L-35 -0M-34.6 -8.6L-39.5 -17.8M-34.6 -8.6L-43.3 -2.8M0 0L-42.3 -54.1M-15.4 -19.7L-11.4 -35.6M-15.4 -19.7L-31.8 -19.7M-24 -30.7L-20.9 -46.1M-24 -30.7L-39.6 -31.4M-31.7 -40.6L-29.3 -55.3M-31.7 -40.6L-46.6 -41.8M0 0L0 -84.5M0 -30.7L14.6 -43.2M0 -30.7L-14.6 -43.2M0 -48L13.4 -60.5M0 -48L-13.4 -60.5M0 -63.4L12.3 -75.8M0 -63.4L-12.3 -75.8M0 0L42.3 -54.1M15.4 -19.7L31.8 -19.7M15.4 -19.7L11.4 -35.6M24 -30.7L39.6 -31.4M24 -30.7L20.9 -46.1M31.7 -40.6L46.6 -41.8M31.7 -40.6L29.3 -55.3M0 0L46.1 -11.5M16.8 -4.2L25.8 3M16.8 -4.2L21.4 -14.8M26.2 -6.5L35 -0M26.2 -6.5L31 -16.4M34.6 -8.6L43.3 -2.8M34.6 -8.6L39.5 -17.8" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.3" stroke-linecap="round"/><circle r="3.4" fill="#2C7A52"/></g><g id="leafB"><path d="M0 0C-6.2 -19.9 -26.3 -24.1 -52.4 -13.1C-34.5 8.9 -14.8 14.7 0 0ZM0 0C10.3 -27.8 -8.9 -50.4 -48 -61.5C-46.8 -20.9 -29.5 3.2 0 0ZM0 0C28.4 -19.2 27 -55.7 0 -96C-27 -55.7 -28.4 -19.2 0 0ZM0 0C29.5 3.2 46.8 -20.9 48 -61.5C8.9 -50.4 -10.3 -27.8 0 0ZM0 0C14.8 14.7 34.5 8.9 52.4 -13.1C26.3 -24.1 6.2 -19.9 0 0Z" fill="url(#gLeafB)"/><path d="M0 0C-6.2 -19.9 -26.3 -24.1 -52.4 -13.1ZM0 0C10.3 -27.8 -8.9 -50.4 -48 -61.5ZM0 0C28.4 -19.2 27 -55.7 0 -96ZM0 0C29.5 3.2 46.8 -20.9 48 -61.5ZM0 0C14.8 14.7 34.5 8.9 52.4 -13.1Z" fill="rgba(0,28,14,.17)"/><path d="M0 0L-46.1 -11.5M-16.8 -4.2L-21.4 -14.8M-16.8 -4.2L-25.8 3M-26.2 -6.5L-31 -16.4M-26.2 -6.5L-35 -0M-34.6 -8.6L-39.5 -17.8M-34.6 -8.6L-43.3 -2.8M0 0L-42.3 -54.1M-15.4 -19.7L-11.4 -35.6M-15.4 -19.7L-31.8 -19.7M-24 -30.7L-20.9 -46.1M-24 -30.7L-39.6 -31.4M-31.7 -40.6L-29.3 -55.3M-31.7 -40.6L-46.6 -41.8M0 0L0 -84.5M0 -30.7L14.6 -43.2M0 -30.7L-14.6 -43.2M0 -48L13.4 -60.5M0 -48L-13.4 -60.5M0 -63.4L12.3 -75.8M0 -63.4L-12.3 -75.8M0 0L42.3 -54.1M15.4 -19.7L31.8 -19.7M15.4 -19.7L11.4 -35.6M24 -30.7L39.6 -31.4M24 -30.7L20.9 -46.1M31.7 -40.6L46.6 -41.8M31.7 -40.6L29.3 -55.3M0 0L46.1 -11.5M16.8 -4.2L25.8 3M16.8 -4.2L21.4 -14.8M26.2 -6.5L35 -0M26.2 -6.5L31 -16.4M34.6 -8.6L43.3 -2.8M34.6 -8.6L39.5 -17.8" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.3" stroke-linecap="round"/><circle r="3.4" fill="#2C7A52"/></g>
+</defs><g class="bg" data-par="-1"><circle class="sun" cx="262" cy="292" r="236" fill="url(#gSun)"/><circle class="sun2" cx="270" cy="150" r="150" fill="url(#gHalo)"/><circle class="ring r1" cx="262" cy="292" r="232"/><circle class="ring r2" cx="262" cy="292" r="272"/></g><g class="ground"><ellipse cx="262" cy="660" rx="196" ry="23" fill="rgba(0,0,0,.28)"/><path d="M64 656C90 634 176 626 262 626C348 626 434 634 460 656C440 674 350 682 262 682C174 682 84 674 64 656Z" fill="url(#gSoil)"/><path d="M96 654C140 642 200 638 262 638M428 654C384 642 324 638 262 638M130 668C180 660 220 658 262 658M394 668C344 660 304 658 262 658" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2" stroke-linecap="round"/><g fill="rgba(255,255,255,.18)"><circle cx="150" cy="652" r="2.2"/><circle cx="372" cy="648" r="2"/><circle cx="318" cy="664" r="1.8"/><circle cx="206" cy="668" r="1.8"/><circle cx="426" cy="658" r="1.8"/></g></g><g class="sw" data-k="1.0" data-f="0.7" data-ph="0.4" data-px="262" data-py="654" data-w="0.8" data-cx="262" data-cy="400" data-r="0"><g class="back"><path d="M261 634Q222.5 615 184 612" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(184 612) rotate(-80) scale(1.2 1.2)"><g class="pop" style="--d:1.0s"><g class="sw" data-k="5.2" data-f="1.4" data-ph="4.7" data-px="0" data-py="0" data-w="1.6" data-cx="184" data-cy="582" data-r="58"><use href="#leafB"/></g></g></g><path d="M265 614Q305.5 598 346 598" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(346 598) rotate(78) scale(-1.2 1.2)"><g class="pop" style="--d:1.08s"><g class="sw" data-k="6.1" data-f="1.5" data-ph="4.6" data-px="0" data-py="0" data-w="1.6" data-cx="346" data-cy="568" data-r="58"><use href="#leafB"/></g></g></g><path d="M262 556Q226 544 190 548" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(190 548) rotate(-72) scale(-0.9 0.9)"><g class="pop" style="--d:1.16s"><g class="sw" data-k="3.7" data-f="1.5" data-ph="2.9" data-px="0" data-py="0" data-w="1.6" data-cx="190" data-cy="518" data-r="58"><use href="#leafF"/></g></g></g><path d="M265 496Q297.5 478 330 476" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(330 476) rotate(62) scale(0.9 0.9)"><g class="pop" style="--d:1.24s"><g class="sw" data-k="5.3" data-f="1" data-ph="5.7" data-px="0" data-py="0" data-w="1.6" data-cx="330" data-cy="446" data-r="58"><use href="#leafB"/></g></g></g><path d="M264 396Q235 388 206 396" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(206 396) rotate(-70) scale(0.9 0.9)"><g class="pop" style="--d:1.34s"><g class="sw" data-k="4.8" data-f="1.2" data-ph="1.5" data-px="0" data-py="0" data-w="1.6" data-cx="206" data-cy="366" data-r="58"><use href="#leafB"/></g></g></g><path d="M266 356Q296 338 326 336" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(326 336) rotate(54) scale(-0.8 0.8)"><g class="pop" style="--d:1.44s"><g class="sw" data-k="5.1" data-f="1" data-ph="0.1" data-px="0" data-py="0" data-w="1.6" data-cx="326" data-cy="306" data-r="58"><use href="#leafF"/></g></g></g><path d="M263 300Q242.5 287 222 290" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(222 290) rotate(-60) scale(0.7 0.7)"><g class="pop" style="--d:1.56s"><g class="sw" data-k="4.3" data-f="1.4" data-ph="5.8" data-px="0" data-py="0" data-w="1.6" data-cx="222" data-cy="260" data-r="58"><use href="#leafF"/></g></g></g><path d="M263 292Q284.5 279 306 282" fill="none" stroke="#3C8A5A" stroke-width="3.6" stroke-linecap="round"/><g transform="translate(306 282) rotate(58) scale(-0.7 0.7)"><g class="pop" style="--d:1.62s"><g class="sw" data-k="4" data-f="1" data-ph="5" data-px="0" data-py="0" data-w="1.6" data-cx="306" data-cy="252" data-r="58"><use href="#leafF"/></g></g></g></g><path class="stem" d="M270.4 652.9L269.7 647.2L269.2 641.5L268.8 635.8L268.7 630L268.7 624.2L268.8 618.3L269 612.4L269.3 606.5L269.7 600.5L270.2 594.5L270.6 588.4L271.1 582.3L271.6 576.2L272 570L272.3 563.8L272.5 557.5L272.7 551.2L272.7 544.9L272.5 538.5L272.1 532.1L271.6 525.6L270.8 519.2L270 512.6L269.5 506.1L269.1 499.5L268.8 493L268.8 486.5L268.8 480L268.9 473.6L269.2 467.1L269.5 460.6L269.8 454.2L270.2 447.7L270.6 441.2L271 434.7L271.4 428.2L271.7 421.7L272 415.2L272.2 408.7L272.3 402.1L272.2 395.5L272 388.9L271.7 382.2L271.1 375.5L270.6 370.1L270.1 364.7L269.8 359.2L269.5 353.7L269.4 348.1L269.2 342.5L269.1 336.8L269.1 331.1L269.1 325.4L269.1 319.6L269.1 313.8L269.1 308L269 302.2L268.9 296.3L268.8 290.4L268.6 284.6L268.4 278.7L268 272.9L267.6 267L267 261.2L266.3 255.3L265.5 249.5L258.5 250.5L259.2 256.2L259.7 261.8L260.1 267.6L260.4 273.3L260.6 279L260.7 284.8L260.8 290.6L260.7 296.3L260.7 302.1L260.6 307.9L260.4 313.7L260.3 319.5L260.1 325.3L260 331L259.9 336.8L259.8 342.5L259.8 348.2L259.8 353.9L259.9 359.6L260.1 365.3L260.4 370.9L260.9 376.5L261.2 382.8L261.4 389.2L261.4 395.6L261.3 401.9L261.1 408.3L260.8 414.7L260.4 421.1L259.9 427.5L259.4 433.9L258.8 440.3L258.3 446.8L257.7 453.3L257.2 459.8L256.7 466.4L256.3 473L256 479.7L255.8 486.4L255.8 493.2L255.9 500L256.1 506.9L256.6 513.8L257.2 520.8L257.8 526.9L258.2 532.9L258.4 538.9L258.4 544.9L258.3 550.9L258 556.9L257.6 562.9L257.1 568.9L256.6 575L256 581L255.4 587.1L254.7 593.1L254.1 599.2L253.6 605.3L253.1 611.5L252.7 617.6L252.4 623.8L252.3 630L252.3 636.2L252.5 642.5L252.9 648.8L253.6 655.1Z" fill="url(#gStem)"/><g class="branches"><g class="sw" data-k="1.8" data-f="0.85" data-ph="3.9" data-px="266" data-py="566" data-w="1.0" data-cx="319" data-cy="552" data-r="0"><path class="br br-r" style="--d:1.0s" d="M265.7 570.7L271.6 570.9L277.5 570.8L283.5 570.5L289.5 570L295.5 569.3L301.6 568.4L307.7 567.3L313.8 566L319.9 564.4L325.9 562.6L332 560.6L338 558.4L344 555.9L350 553.2L355.9 550.3L361.8 547.1L367.5 543.6L373.2 539.9L370.8 536.1L365.1 539.4L359.3 542.6L353.5 545.4L347.7 548L341.8 550.4L335.9 552.6L330 554.5L324.1 556.1L318.1 557.6L312.2 558.8L306.3 559.8L300.5 560.6L294.6 561.2L288.9 561.6L283.1 561.8L277.4 561.8L271.8 561.6L266.3 561.3Z" fill="url(#gBranch)"/><circle cx="266" cy="566" r="8.5" fill="#5C8B49"/><g transform="translate(372 538) rotate(26) scale(0.6)"><g class="pop" style="--d:2.55s"><g class="sw" data-k="2.2" data-f="1.05" data-ph="4.8" data-px="0" data-py="0" data-w="1.3" data-cx="398.1" data-cy="484.5" data-r="38.4"><g class="boll" style="--o:0" data-open="0" data-cx="398.1" data-cy="484.5" data-s="0.6"><g class="bracts"><g transform="translate(0 6) rotate(-58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(0) scale(0.8)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g><g class="valves"><g class="vv" style="--a:-66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:-32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g></g><g class="seeds"><ellipse cx="-16" cy="-44" rx="6" ry="4.2" transform="rotate(-28 -16 -44)" fill="#4A2F1B"/><ellipse cx="6" cy="-50" rx="6" ry="4.2" transform="rotate(14 6 -50)" fill="#4A2F1B"/><ellipse cx="22" cy="-40" rx="6" ry="4.2" transform="rotate(40 22 -40)" fill="#4A2F1B"/></g><g class="body"><path d="M0 -4C-30 -8 -35 -52 -12 -76C-6 -82 -2 -88 0 -96C2 -88 6 -82 12 -76C35 -52 30 -8 0 -4Z" fill="url(#gBody)"/><path d="M-11 -30C-14 -50 -6 -68 -1 -84" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/><path d="M0 -8C-3 -40 -2 -70 0 -92M0 -8C-14 -36 -14 -62 -8 -78M0 -8C14 -36 14 -62 8 -78" stroke="rgba(8,50,30,.28)" stroke-width="1.2" fill="none"/></g><g class="lint"><ellipse class="lsh" cx="4" cy="-80" rx="60" ry="50" fill="rgba(8,16,64,.22)"/><g class="fuzz"><circle class="lb" style="--i:28" cx="17.3" cy="-146.2" r="11.7" fill="url(#gLa)"/><circle class="lb" style="--i:22" cx="-14.1" cy="-144.9" r="10.7" fill="url(#gLa)"/><circle class="lb" style="--i:31" cx="-0.9" cy="-147.1" r="11.4" fill="url(#gLa)"/><circle class="lb" style="--i:44" cx="10" cy="-147.9" r="11.6" fill="url(#gLa)"/><circle class="lb" style="--i:43" cx="-9.1" cy="-147.4" r="11.1" fill="url(#gLa)"/><circle class="lb" style="--i:29" cx="22.2" cy="-143.5" r="11.4" fill="url(#gLa)"/><circle class="lb" style="--i:39" cx="34.5" cy="-136.9" r="11.2" fill="url(#gLb)"/><circle class="lb" style="--i:17" cx="-2.6" cy="-135.7" r="18.5" fill="url(#gLa)"/><circle class="lb" style="--i:36" cx="-29.9" cy="-137.9" r="12.2" fill="url(#gLa)"/><circle class="lb" style="--i:19" cx="20.7" cy="-131.6" r="18.1" fill="url(#gLb)"/><circle class="lb" style="--i:33" cx="37.7" cy="-133" r="10.2" fill="url(#gLb)"/><circle class="lb" style="--i:32" cx="39.4" cy="-130.9" r="11.9" fill="url(#gLb)"/><circle class="lb" style="--i:11" cx="-20.2" cy="-130.5" r="15.7" fill="url(#gLa)"/><circle class="lb" style="--i:27" cx="-41.9" cy="-127.6" r="10.9" fill="url(#gLa)"/><circle class="lb" style="--i:23" cx="43.5" cy="-128.6" r="10.3" fill="url(#gLb)"/><circle class="lb" style="--i:5" cx="0.4" cy="-119.5" r="19.9" fill="url(#gLb)"/><circle class="lb" style="--i:18" cx="36.5" cy="-118" r="18.9" fill="url(#gLb)"/><circle class="lb" style="--i:9" cx="-36.1" cy="-116.3" r="16.4" fill="url(#gLa)"/><circle class="lb" style="--i:6" cx="18.9" cy="-112.2" r="23" fill="url(#gLb)"/><circle class="lb" style="--i:1" cx="-20.4" cy="-109.2" r="22.2" fill="url(#gLb)"/><circle class="lb" style="--i:38" cx="53.5" cy="-109.4" r="13.1" fill="url(#gLc)"/><circle class="lb" style="--i:24" cx="-51.6" cy="-111.7" r="12.2" fill="url(#gLa)"/><circle class="lb" style="--i:34" cx="-54.6" cy="-100" r="12" fill="url(#gLa)"/><circle class="lb" style="--i:10" cx="-42.5" cy="-99.6" r="16.8" fill="url(#gLb)"/><circle class="lb" style="--i:0" cx="-0.1" cy="-97.7" r="27" fill="url(#gLb)"/><circle class="lb" style="--i:14" cx="42.7" cy="-94" r="18.5" fill="url(#gLc)"/><circle class="lb" style="--i:30" cx="54.7" cy="-92.8" r="13" fill="url(#gLd)"/><circle class="lb" style="--i:3" cx="-24.9" cy="-91.4" r="21.3" fill="url(#gLb)"/><circle class="lb" style="--i:4" cx="22.9" cy="-86.7" r="22.2" fill="url(#gLc)"/><circle class="lb" style="--i:15" cx="-39.1" cy="-78.4" r="15.5" fill="url(#gLb)"/><circle class="lb" style="--i:41" cx="-51.7" cy="-77.1" r="12.9" fill="url(#gLb)"/><circle class="lb" style="--i:21" cx="50.8" cy="-78.2" r="12.3" fill="url(#gLd)"/><circle class="lb" style="--i:16" cx="35.8" cy="-75.2" r="15.1" fill="url(#gLd)"/><circle class="lb" style="--i:2" cx="8.3" cy="-74.1" r="21" fill="url(#gLc)"/><circle class="lb" style="--i:7" cx="-11.3" cy="-74.6" r="19" fill="url(#gLc)"/><circle class="lb" style="--i:40" cx="-45" cy="-65.2" r="10.1" fill="url(#gLc)"/><circle class="lb" style="--i:8" cx="21.4" cy="-62.2" r="17" fill="url(#gLd)"/><circle class="lb" style="--i:37" cx="42" cy="-64.5" r="10.5" fill="url(#gLd)"/><circle class="lb" style="--i:13" cx="-21.7" cy="-60.9" r="15.6" fill="url(#gLc)"/><circle class="lb" style="--i:25" cx="30.9" cy="-54.7" r="13.3" fill="url(#gLd)"/><circle class="lb" style="--i:12" cx="1.9" cy="-56.2" r="18.8" fill="url(#gLd)"/><circle class="lb" style="--i:42" cx="-33" cy="-54.1" r="14" fill="url(#gLc)"/><circle class="lb" style="--i:35" cx="17.6" cy="-48.2" r="13.7" fill="url(#gLd)"/><circle class="lb" style="--i:26" cx="-17.7" cy="-47" r="11.8" fill="url(#gLd)"/><circle class="lb" style="--i:20" cx="-5.3" cy="-45" r="11.6" fill="url(#gLd)"/></g><path class="fib" d="M49.6 -62.8Q58 -57 66.1 -50.9M-5.9 -152.9Q-3.7 -165.9 -11.8 -178M-19 -150.3Q-23.1 -159.1 -24 -169M56.1 -73.7Q70.2 -77.1 74.3 -56.7M-37.4 -50.9Q-35.4 -39 -54.5 -43.4M47.5 -60.2Q47.8 -50.2 62.5 -58.1M23.9 -148.5Q29.3 -158.6 32 -169.7M-44 -135.5Q-50.3 -137.8 -51.1 -145.8M-57 -75.8Q-66.7 -74.3 -74.3 -67.2M-49.6 -62.9Q-60.5 -65.1 -57.2 -47.4M-55.7 -73Q-61.3 -66.5 -71.3 -70.1M25 -148.1Q30.2 -157.9 33.3 -168.6M5.2 -39.1Q5.7 -30.4 6.9 -21.8M-41.2 -138.1Q-44.3 -152.5 -63.9 -151.8M-60.4 -88.7Q-69.3 -83.7 -79.6 -90.2M47 -132.3Q54.4 -141.3 66.2 -145.1"/></g><circle class="hit" cx="0" cy="-82" r="76"/></g></g></g></g></g><g class="sw" data-k="1.8" data-f="0.85" data-ph="0.8" data-px="262" data-py="500" data-w="1.0" data-cx="207" data-cy="485" data-r="0"><path class="br br-l" style="--d:1.1s" d="M262 495.2L256.4 495.3L250.7 495.2L244.9 495L239 494.6L233 494L227 493.2L220.9 492.3L214.8 491.2L208.6 489.8L202.4 488.3L196.2 486.6L190 484.6L183.8 482.4L177.6 480L171.4 477.4L165.3 474.5L159.2 471.4L153.2 468L150.8 472L156.8 475.7L163 479.1L169.1 482.3L175.4 485.3L181.6 488L187.9 490.5L194.2 492.8L200.6 494.8L206.9 496.7L213.2 498.3L219.5 499.7L225.7 501L232 502.1L238.1 502.9L244.2 503.6L250.2 504.2L256.2 504.5L262 504.8Z" fill="url(#gBranch)"/><circle cx="262" cy="500" r="8.5" fill="#5C8B49"/><g transform="translate(152 470) rotate(-30) scale(0.7)"><g class="pop" style="--d:2.35s"><g class="sw" data-k="2.2" data-f="1.05" data-ph="0.6" data-px="0" data-py="0" data-w="1.3" data-cx="119.4" data-cy="413.5" data-r="42.2"><g class="boll" style="--o:0" data-open="0.52" data-cx="119.4" data-cy="413.5" data-s="0.7"><g class="bracts"><g transform="translate(0 6) rotate(-58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(0) scale(0.8)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g><g class="valves"><g class="vv" style="--a:-66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:-32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g></g><g class="seeds"><ellipse cx="-16" cy="-44" rx="6" ry="4.2" transform="rotate(-28 -16 -44)" fill="#4A2F1B"/><ellipse cx="6" cy="-50" rx="6" ry="4.2" transform="rotate(14 6 -50)" fill="#4A2F1B"/><ellipse cx="22" cy="-40" rx="6" ry="4.2" transform="rotate(40 22 -40)" fill="#4A2F1B"/></g><g class="body"><path d="M0 -4C-30 -8 -35 -52 -12 -76C-6 -82 -2 -88 0 -96C2 -88 6 -82 12 -76C35 -52 30 -8 0 -4Z" fill="url(#gBody)"/><path d="M-11 -30C-14 -50 -6 -68 -1 -84" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/><path d="M0 -8C-3 -40 -2 -70 0 -92M0 -8C-14 -36 -14 -62 -8 -78M0 -8C14 -36 14 -62 8 -78" stroke="rgba(8,50,30,.28)" stroke-width="1.2" fill="none"/></g><g class="lint"><ellipse class="lsh" cx="4" cy="-80" rx="60" ry="50" fill="rgba(8,16,64,.22)"/><g class="fuzz"><circle class="lb" style="--i:41" cx="19.5" cy="-145.1" r="12" fill="url(#gLa)"/><circle class="lb" style="--i:29" cx="-2.8" cy="-147.8" r="10.5" fill="url(#gLa)"/><circle class="lb" style="--i:36" cx="-17.8" cy="-143.8" r="11.6" fill="url(#gLa)"/><circle class="lb" style="--i:37" cx="-14.3" cy="-144.2" r="11.3" fill="url(#gLa)"/><circle class="lb" style="--i:31" cx="8.1" cy="-146.7" r="12.8" fill="url(#gLa)"/><circle class="lb" style="--i:33" cx="31.4" cy="-141.3" r="10" fill="url(#gLb)"/><circle class="lb" style="--i:13" cx="1.3" cy="-135.6" r="15" fill="url(#gLa)"/><circle class="lb" style="--i:43" cx="38.9" cy="-136.6" r="10.1" fill="url(#gLb)"/><circle class="lb" style="--i:21" cx="-34.6" cy="-134.7" r="12.2" fill="url(#gLa)"/><circle class="lb" style="--i:39" cx="42.2" cy="-132.5" r="10.4" fill="url(#gLb)"/><circle class="lb" style="--i:20" cx="-37" cy="-131.4" r="10.2" fill="url(#gLa)"/><circle class="lb" style="--i:18" cx="26.1" cy="-130.2" r="16.2" fill="url(#gLb)"/><circle class="lb" style="--i:10" cx="-21.4" cy="-129.5" r="16" fill="url(#gLa)"/><circle class="lb" style="--i:34" cx="48" cy="-128.5" r="12.4" fill="url(#gLb)"/><circle class="lb" style="--i:28" cx="-47" cy="-123.3" r="13.5" fill="url(#gLa)"/><circle class="lb" style="--i:12" cx="40.9" cy="-116.6" r="15.7" fill="url(#gLb)"/><circle class="lb" style="--i:9" cx="-36.5" cy="-117.6" r="15.5" fill="url(#gLa)"/><circle class="lb" style="--i:6" cx="5.4" cy="-119.2" r="20.2" fill="url(#gLb)"/><circle class="lb" style="--i:7" cx="22.5" cy="-110.4" r="21" fill="url(#gLb)"/><circle class="lb" style="--i:38" cx="-54.8" cy="-110.8" r="13.1" fill="url(#gLa)"/><circle class="lb" style="--i:30" cx="57.6" cy="-109.9" r="11.9" fill="url(#gLc)"/><circle class="lb" style="--i:3" cx="-18.7" cy="-111.6" r="22.8" fill="url(#gLb)"/><circle class="lb" style="--i:15" cx="45.9" cy="-99.7" r="17.4" fill="url(#gLc)"/><circle class="lb" style="--i:26" cx="58.8" cy="-99.1" r="10.1" fill="url(#gLc)"/><circle class="lb" style="--i:0" cx="-1.4" cy="-95.1" r="27" fill="url(#gLb)"/><circle class="lb" style="--i:35" cx="-58.8" cy="-92.6" r="11.9" fill="url(#gLb)"/><circle class="lb" style="--i:14" cx="-45.9" cy="-93.6" r="18.6" fill="url(#gLb)"/><circle class="lb" style="--i:2" cx="-26.9" cy="-96.4" r="21.1" fill="url(#gLb)"/><circle class="lb" style="--i:40" cx="-57.7" cy="-82.5" r="11.2" fill="url(#gLb)"/><circle class="lb" style="--i:1" cx="23.5" cy="-86" r="22.6" fill="url(#gLc)"/><circle class="lb" style="--i:17" cx="-43.2" cy="-79.7" r="16.1" fill="url(#gLb)"/><circle class="lb" style="--i:23" cx="53" cy="-77.5" r="13" fill="url(#gLd)"/><circle class="lb" style="--i:5" cx="-16.2" cy="-76.3" r="21" fill="url(#gLc)"/><circle class="lb" style="--i:4" cx="10.8" cy="-75.3" r="21.6" fill="url(#gLc)"/><circle class="lb" style="--i:8" cx="36.5" cy="-74.5" r="16.7" fill="url(#gLd)"/><circle class="lb" style="--i:44" cx="-49.4" cy="-65.2" r="12.2" fill="url(#gLc)"/><circle class="lb" style="--i:25" cx="44.4" cy="-65.8" r="10.5" fill="url(#gLd)"/><circle class="lb" style="--i:19" cx="-22.8" cy="-60.2" r="15.2" fill="url(#gLc)"/><circle class="lb" style="--i:11" cx="16.8" cy="-60.3" r="18.7" fill="url(#gLd)"/><circle class="lb" style="--i:24" cx="33.5" cy="-56.6" r="10.5" fill="url(#gLd)"/><circle class="lb" style="--i:16" cx="-4" cy="-56.4" r="17.7" fill="url(#gLd)"/><circle class="lb" style="--i:32" cx="-37.8" cy="-54.7" r="11.9" fill="url(#gLc)"/><circle class="lb" style="--i:42" cx="-19.8" cy="-47" r="12.6" fill="url(#gLd)"/><circle class="lb" style="--i:22" cx="15.5" cy="-48.2" r="10.2" fill="url(#gLd)"/><circle class="lb" style="--i:27" cx="-2.4" cy="-45.2" r="10.8" fill="url(#gLd)"/></g><path class="fib" d="M-36.6 -49.2Q-33.5 -38.8 -51.3 -42.7M-39.6 -140.9Q-45 -152.8 -57.6 -159.1M23.8 -148.8Q30.5 -152.9 24 -162.2M17.9 -150.6Q15.6 -161.3 28.2 -167.6M-48.7 -58.7Q-62.9 -56.4 -62 -37M-46.1 -135.8Q-47.6 -144.8 -60.4 -142.2M48 -134.1Q50.9 -144.3 65.1 -142M-13.7 -40.5Q-8.9 -28.1 -25.6 -20.3M-45.2 -136.6Q-52.7 -140 -53.7 -149.7M61.6 -113.3Q73 -115.8 83.4 -121.3M-52.2 -62.5Q-54.7 -54.6 -65.8 -58.4M35.2 -48.4Q32.3 -37.5 50.5 -40.3M33.3 -47.3Q37.4 -39.6 42.6 -32.6M29.3 -45.4Q37.5 -39.5 33.2 -27.3M53 -63.5Q59 -59.9 64.2 -55.2M53.2 -128.2Q62.7 -136.3 74.4 -141.3"/></g><circle class="hit" cx="0" cy="-82" r="76"/></g></g></g></g></g><g class="sw" data-k="1.8" data-f="0.85" data-ph="0" data-px="266" data-py="420" data-w="1.0" data-cx="326" data-cy="398" data-r="0"><path class="br br-r" style="--d:1.2s" d="M266 424.8L272.2 424.5L278.6 424.1L285.2 423.4L291.8 422.5L298.6 421.4L305.4 420L312.4 418.3L319.3 416.4L326.3 414.1L333.4 411.5L340.4 408.6L347.3 405.3L354.3 401.7L361.1 397.7L367.9 393.3L374.6 388.5L381.1 383.3L387.5 377.7L384.5 374.3L378.1 379.6L371.5 384.4L364.9 388.8L358.2 392.8L351.5 396.4L344.7 399.7L337.8 402.6L331 405.2L324.2 407.4L317.4 409.3L310.6 410.9L303.9 412.3L297.3 413.4L290.7 414.2L284.3 414.8L278.1 415.1L271.9 415.3L266 415.2Z" fill="url(#gBranch)"/><circle cx="266" cy="420" r="8.5" fill="#5C8B49"/><g transform="translate(386 376) rotate(24) scale(0.9)"><g class="pop" style="--d:2.0s"><g class="sw" data-k="2.2" data-f="1.05" data-ph="3.9" data-px="0" data-py="0" data-w="1.3" data-cx="419.6" data-cy="300.6" data-r="53.3"><g class="boll" style="--o:0" data-open="1" data-cx="419.6" data-cy="300.6" data-s="0.9"><g class="bracts"><g transform="translate(0 6) rotate(-58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(0) scale(0.8)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g><g class="valves"><g class="vv" style="--a:-66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:-32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g></g><g class="seeds"><ellipse cx="-16" cy="-44" rx="6" ry="4.2" transform="rotate(-28 -16 -44)" fill="#4A2F1B"/><ellipse cx="6" cy="-50" rx="6" ry="4.2" transform="rotate(14 6 -50)" fill="#4A2F1B"/><ellipse cx="22" cy="-40" rx="6" ry="4.2" transform="rotate(40 22 -40)" fill="#4A2F1B"/></g><g class="body"><path d="M0 -4C-30 -8 -35 -52 -12 -76C-6 -82 -2 -88 0 -96C2 -88 6 -82 12 -76C35 -52 30 -8 0 -4Z" fill="url(#gBody)"/><path d="M-11 -30C-14 -50 -6 -68 -1 -84" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/><path d="M0 -8C-3 -40 -2 -70 0 -92M0 -8C-14 -36 -14 -62 -8 -78M0 -8C14 -36 14 -62 8 -78" stroke="rgba(8,50,30,.28)" stroke-width="1.2" fill="none"/></g><g class="lint"><ellipse class="lsh" cx="4" cy="-80" rx="60" ry="50" fill="rgba(8,16,64,.22)"/><g class="fuzz"><circle class="lb" style="--i:44" cx="-17.3" cy="-144.5" r="9.1" fill="url(#gLa)"/><circle class="lb" style="--i:35" cx="-1.2" cy="-145.6" r="13.7" fill="url(#gLa)"/><circle class="lb" style="--i:43" cx="12.9" cy="-144.2" r="11.1" fill="url(#gLa)"/><circle class="lb" style="--i:32" cx="16.6" cy="-144.3" r="9.5" fill="url(#gLa)"/><circle class="lb" style="--i:37" cx="-23.3" cy="-142.2" r="10" fill="url(#gLa)"/><circle class="lb" style="--i:38" cx="-17.7" cy="-143.3" r="13.1" fill="url(#gLa)"/><circle class="lb" style="--i:36" cx="34.5" cy="-134.2" r="9.4" fill="url(#gLb)"/><circle class="lb" style="--i:8" cx="3" cy="-134.6" r="18.7" fill="url(#gLa)"/><circle class="lb" style="--i:22" cx="33.8" cy="-135.4" r="12.1" fill="url(#gLb)"/><circle class="lb" style="--i:34" cx="-35.5" cy="-135" r="13.3" fill="url(#gLa)"/><circle class="lb" style="--i:10" cx="24.4" cy="-128" r="15.9" fill="url(#gLb)"/><circle class="lb" style="--i:33" cx="-44.6" cy="-127" r="10.3" fill="url(#gLa)"/><circle class="lb" style="--i:20" cx="39.1" cy="-129.7" r="11.9" fill="url(#gLb)"/><circle class="lb" style="--i:16" cx="-24.5" cy="-128.4" r="17.6" fill="url(#gLa)"/><circle class="lb" style="--i:29" cx="46.3" cy="-124" r="11.9" fill="url(#gLb)"/><circle class="lb" style="--i:3" cx="5.4" cy="-118.3" r="21.3" fill="url(#gLb)"/><circle class="lb" style="--i:15" cx="-39" cy="-114.5" r="17.2" fill="url(#gLa)"/><circle class="lb" style="--i:18" cx="39.1" cy="-113.6" r="18.1" fill="url(#gLc)"/><circle class="lb" style="--i:41" cx="-52.6" cy="-114.8" r="12.2" fill="url(#gLa)"/><circle class="lb" style="--i:2" cx="19.8" cy="-110.6" r="21.1" fill="url(#gLb)"/><circle class="lb" style="--i:1" cx="-19" cy="-111.8" r="22.7" fill="url(#gLb)"/><circle class="lb" style="--i:31" cx="54.2" cy="-109.8" r="13.2" fill="url(#gLc)"/><circle class="lb" style="--i:26" cx="-56.6" cy="-96.5" r="11.8" fill="url(#gLa)"/><circle class="lb" style="--i:19" cx="-44.1" cy="-94.7" r="16.5" fill="url(#gLb)"/><circle class="lb" style="--i:9" cx="44.1" cy="-97.1" r="18.8" fill="url(#gLc)"/><circle class="lb" style="--i:4" cx="-26" cy="-96.4" r="20.9" fill="url(#gLb)"/><circle class="lb" style="--i:0" cx="-0.9" cy="-95.9" r="27" fill="url(#gLb)"/><circle class="lb" style="--i:39" cx="56.6" cy="-95.2" r="12.7" fill="url(#gLc)"/><circle class="lb" style="--i:7" cx="25.2" cy="-90.1" r="19.2" fill="url(#gLc)"/><circle class="lb" style="--i:30" cx="-54.8" cy="-84.1" r="13.9" fill="url(#gLb)"/><circle class="lb" style="--i:28" cx="54.6" cy="-82.3" r="13.1" fill="url(#gLd)"/><circle class="lb" style="--i:17" cx="-39.8" cy="-79.6" r="15.1" fill="url(#gLb)"/><circle class="lb" style="--i:11" cx="40.4" cy="-80" r="16.5" fill="url(#gLd)"/><circle class="lb" style="--i:6" cx="-9.4" cy="-74.8" r="20.1" fill="url(#gLc)"/><circle class="lb" style="--i:5" cx="10.5" cy="-75" r="19.1" fill="url(#gLc)"/><circle class="lb" style="--i:40" cx="47.5" cy="-68.5" r="12.2" fill="url(#gLd)"/><circle class="lb" style="--i:12" cx="21" cy="-61.8" r="17.4" fill="url(#gLd)"/><circle class="lb" style="--i:21" cx="-43.8" cy="-65" r="11.9" fill="url(#gLc)"/><circle class="lb" style="--i:13" cx="-19.5" cy="-61.5" r="18.4" fill="url(#gLc)"/><circle class="lb" style="--i:23" cx="-33.5" cy="-56.4" r="12.5" fill="url(#gLc)"/><circle class="lb" style="--i:42" cx="35.5" cy="-57" r="12.1" fill="url(#gLd)"/><circle class="lb" style="--i:14" cx="-0" cy="-57.3" r="18" fill="url(#gLd)"/><circle class="lb" style="--i:27" cx="21.9" cy="-50.1" r="11.2" fill="url(#gLd)"/><circle class="lb" style="--i:25" cx="-18.8" cy="-49.4" r="13.2" fill="url(#gLd)"/><circle class="lb" style="--i:24" cx="-1.8" cy="-46.5" r="11" fill="url(#gLd)"/></g><path class="fib" d="M58.1 -116.7Q68.3 -117 74.6 -127.1M59.9 -112.1Q70 -112.5 77.9 -120.1M48.6 -60.9Q62.3 -57.9 64 -40.1M-2.4 -151.5Q0 -160.2 -5.7 -168.5M41.5 -137.7Q47.9 -148.6 59.8 -154.8M-7 -40.8Q-13.1 -33.9 -3.5 -25.3M37.1 -140.8Q37.5 -155.1 57.7 -154.8M-59 -77.3Q-70.8 -76.5 -79.4 -66.4M-28.6 -145.4Q-31.5 -151.9 -35.4 -157.9M61.7 -86.4Q73.6 -84.7 85.4 -81.9M-47.2 -132.5Q-53.8 -143.2 -67.8 -145.5M-20.5 -43.5Q-25.9 -32.1 -27.4 -19.3M-62.6 -95.1Q-75.3 -94.9 -88 -94.8M-62.4 -100.6Q-69.9 -109.9 -79.4 -93.4M-48.5 -131.1Q-62 -133.8 -63.3 -151.4M53.7 -124.6Q61.5 -131.2 72 -133.5"/></g><circle class="hit" cx="0" cy="-82" r="76"/></g></g></g></g></g><g class="sw" data-k="1.6" data-f="0.85" data-ph="5.5" data-px="264" data-py="340" data-w="1.0" data-cx="206" data-cy="328" data-r="0"><path class="br br-l" style="--d:1.25s" d="M264.3 335.3L258.6 335L252.7 334.7L246.7 334.3L240.5 333.8L234.2 333.2L227.8 332.5L221.3 331.7L214.8 330.8L208.1 329.8L201.5 328.6L194.8 327.3L188.2 325.9L181.5 324.3L174.9 322.5L168.3 320.6L161.7 318.5L155.3 316.3L148.9 313.9L147.1 318.1L153.5 320.8L160 323.4L166.6 325.8L173.2 328L179.9 330L186.7 331.9L193.4 333.7L200.1 335.3L206.9 336.7L213.5 338L220.2 339.3L226.7 340.3L233.2 341.3L239.6 342.2L245.8 343L252 343.6L257.9 344.2L263.7 344.7Z" fill="url(#gBranch)"/><circle cx="264" cy="340" r="8.5" fill="#5C8B49"/><g transform="translate(146 314) rotate(-12) scale(1 0.8)"><g class="pop" style="--d:2.2s"><g class="sw" data-k="3.4" data-f="1.2" data-ph="1.7" data-px="0" data-py="0" data-w="1.2" data-cx="146" data-cy="288" data-r="52"><g class="flower"><g transform="rotate(8)"><path class="pt" d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z"/><path d="M0 -6C-4 -24 -6 -40 -9 -54M0 -6C0 -24 0 -40 0 -54M0 -6C4 -24 6 -40 9 -54" stroke="rgba(120,60,40,.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z" fill="url(#gPetalShade)"/></g><g transform="rotate(80)"><path class="pt" d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z"/><path d="M0 -6C-4 -24 -6 -40 -9 -54M0 -6C0 -24 0 -40 0 -54M0 -6C4 -24 6 -40 9 -54" stroke="rgba(120,60,40,.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z" fill="url(#gPetalShade)"/></g><g transform="rotate(152)"><path class="pt" d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z"/><path d="M0 -6C-4 -24 -6 -40 -9 -54M0 -6C0 -24 0 -40 0 -54M0 -6C4 -24 6 -40 9 -54" stroke="rgba(120,60,40,.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z" fill="url(#gPetalShade)"/></g><g transform="rotate(224)"><path class="pt" d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z"/><path d="M0 -6C-4 -24 -6 -40 -9 -54M0 -6C0 -24 0 -40 0 -54M0 -6C4 -24 6 -40 9 -54" stroke="rgba(120,60,40,.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z" fill="url(#gPetalShade)"/></g><g transform="rotate(296)"><path class="pt" d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z"/><path d="M0 -6C-4 -24 -6 -40 -9 -54M0 -6C0 -24 0 -40 0 -54M0 -6C4 -24 6 -40 9 -54" stroke="rgba(120,60,40,.16)" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M0 0C-32 -6 -48 -40 -27 -59C-19 -67 -8 -66 0 -59C8 -66 19 -67 27 -59C48 -40 32 -6 0 0Z" fill="url(#gPetalShade)"/></g><circle r="17" fill="#C43D74" opacity=".5"/><circle r="12" fill="#F7E9B6"/><circle cx="10" cy="0" r="2.3" fill="#E7A817"/><circle cx="7.7" cy="6.4" r="2.3" fill="#E7A817"/><circle cx="1.7" cy="9.8" r="2.3" fill="#E7A817"/><circle cx="-5" cy="8.7" r="2.3" fill="#E7A817"/><circle cx="-9.4" cy="3.4" r="2.3" fill="#E7A817"/><circle cx="-9.4" cy="-3.4" r="2.3" fill="#E7A817"/><circle cx="-5" cy="-8.7" r="2.3" fill="#E7A817"/><circle cx="1.7" cy="-9.8" r="2.3" fill="#E7A817"/><circle cx="7.7" cy="-6.4" r="2.3" fill="#E7A817"/><circle r="5.4" fill="#C43D74"/><circle class="fhit" cx="0" cy="-30" r="58"/></g></g></g></g></g></g><g transform="translate(262 252) rotate(0) scale(1.2)"><g class="pop" style="--d:1.55s"><g class="sw" data-k="2.2" data-f="1.05" data-ph="1.1" data-px="0" data-py="0" data-w="1.3" data-cx="262" data-cy="136.8" data-r="74.4"><g class="boll hero" style="--o:0" data-open="1" data-cx="262" data-cy="136.8" data-s="1.2"><g class="bracts"><g transform="translate(0 6) rotate(-58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(58) scale(0.98)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><g transform="translate(0 6) rotate(0) scale(0.8)"><path d="M0 0C-14 -4 -34 -14 -36 -34L-28 -33L-33 -50L-21 -43L-20 -60L-8 -49L0 -66L8 -49L20 -60L21 -43L33 -50L28 -33L36 -34C34 -14 14 -4 0 0Z" fill="url(#gBract)"/><path d="M0 -6L0 -52M0 -20L-14 -32M0 -20L14 -32" stroke="rgba(255,255,255,.22)" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g><g class="valves"><g class="vv" style="--a:-66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:-32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:32deg"><g transform="scale(1)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g><g class="vv" style="--a:66deg"><g transform="scale(0.8)"><path d="M0 0C-17 -10 -21 -44 -8 -76C-5 -82 5 -82 8 -76C21 -44 17 -10 0 0Z" fill="url(#gValve)"/><path d="M0 -8C-3 -32 -2 -58 0 -72" fill="none" stroke="rgba(255,226,180,.28)" stroke-width="1.6" stroke-linecap="round"/></g></g></g><g class="seeds"><ellipse cx="-16" cy="-44" rx="6" ry="4.2" transform="rotate(-28 -16 -44)" fill="#4A2F1B"/><ellipse cx="6" cy="-50" rx="6" ry="4.2" transform="rotate(14 6 -50)" fill="#4A2F1B"/><ellipse cx="22" cy="-40" rx="6" ry="4.2" transform="rotate(40 22 -40)" fill="#4A2F1B"/></g><g class="body"><path d="M0 -4C-30 -8 -35 -52 -12 -76C-6 -82 -2 -88 0 -96C2 -88 6 -82 12 -76C35 -52 30 -8 0 -4Z" fill="url(#gBody)"/><path d="M-11 -30C-14 -50 -6 -68 -1 -84" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/><path d="M0 -8C-3 -40 -2 -70 0 -92M0 -8C-14 -36 -14 -62 -8 -78M0 -8C14 -36 14 -62 8 -78" stroke="rgba(8,50,30,.28)" stroke-width="1.2" fill="none"/></g><g class="lint"><ellipse class="lsh" cx="4" cy="-80" rx="60" ry="50" fill="rgba(8,16,64,.22)"/><g class="fuzz"><circle class="lb" style="--i:36" cx="-3.7" cy="-147" r="11.6" fill="url(#gLa)"/><circle class="lb" style="--i:39" cx="19.1" cy="-146.3" r="9.3" fill="url(#gLa)"/><circle class="lb" style="--i:27" cx="8.1" cy="-146.3" r="10.5" fill="url(#gLa)"/><circle class="lb" style="--i:22" cx="-12.6" cy="-143.8" r="10.8" fill="url(#gLa)"/><circle class="lb" style="--i:23" cx="-16.2" cy="-143.4" r="11.3" fill="url(#gLa)"/><circle class="lb" style="--i:41" cx="24.7" cy="-143.5" r="10.5" fill="url(#gLa)"/><circle class="lb" style="--i:35" cx="38.1" cy="-137.1" r="10.9" fill="url(#gLb)"/><circle class="lb" style="--i:43" cx="37.9" cy="-136.8" r="9.6" fill="url(#gLb)"/><circle class="lb" style="--i:24" cx="-31.5" cy="-135.2" r="12.2" fill="url(#gLa)"/><circle class="lb" style="--i:11" cx="9.3" cy="-135.1" r="18.4" fill="url(#gLa)"/><circle class="lb" style="--i:10" cx="-20.3" cy="-129.1" r="19" fill="url(#gLa)"/><circle class="lb" style="--i:42" cx="44" cy="-130.5" r="9.6" fill="url(#gLb)"/><circle class="lb" style="--i:17" cx="28.1" cy="-129.1" r="16.3" fill="url(#gLb)"/><circle class="lb" style="--i:37" cx="49" cy="-127.1" r="13.9" fill="url(#gLb)"/><circle class="lb" style="--i:26" cx="-45.6" cy="-122.7" r="13.2" fill="url(#gLa)"/><circle class="lb" style="--i:13" cx="-35.6" cy="-116.8" r="16.8" fill="url(#gLa)"/><circle class="lb" style="--i:5" cx="0.4" cy="-119.1" r="22.9" fill="url(#gLb)"/><circle class="lb" style="--i:18" cx="40.1" cy="-117.5" r="16.2" fill="url(#gLb)"/><circle class="lb" style="--i:2" cx="-15.2" cy="-113.6" r="21.8" fill="url(#gLb)"/><circle class="lb" style="--i:21" cx="-53.8" cy="-109.6" r="10.4" fill="url(#gLa)"/><circle class="lb" style="--i:6" cx="25.2" cy="-105.7" r="21.6" fill="url(#gLc)"/><circle class="lb" style="--i:38" cx="57.1" cy="-109.3" r="11.2" fill="url(#gLc)"/><circle class="lb" style="--i:40" cx="57.8" cy="-99.4" r="13.1" fill="url(#gLc)"/><circle class="lb" style="--i:9" cx="-44.7" cy="-97.2" r="17" fill="url(#gLb)"/><circle class="lb" style="--i:0" cx="-0.2" cy="-96" r="27" fill="url(#gLb)"/><circle class="lb" style="--i:33" cx="-57.3" cy="-98" r="10.5" fill="url(#gLa)"/><circle class="lb" style="--i:12" cx="44.8" cy="-95" r="15.6" fill="url(#gLc)"/><circle class="lb" style="--i:7" cx="-26.4" cy="-91" r="19.4" fill="url(#gLb)"/><circle class="lb" style="--i:3" cx="24.1" cy="-88.5" r="19.7" fill="url(#gLc)"/><circle class="lb" style="--i:20" cx="53.3" cy="-81.2" r="13.4" fill="url(#gLd)"/><circle class="lb" style="--i:4" cx="-17.8" cy="-77.3" r="19.4" fill="url(#gLc)"/><circle class="lb" style="--i:16" cx="-42.4" cy="-78.8" r="17.1" fill="url(#gLb)"/><circle class="lb" style="--i:15" cx="39" cy="-79.9" r="17.1" fill="url(#gLd)"/><circle class="lb" style="--i:32" cx="-56.3" cy="-79.2" r="13.9" fill="url(#gLb)"/><circle class="lb" style="--i:1" cx="7" cy="-74.4" r="21.5" fill="url(#gLc)"/><circle class="lb" style="--i:29" cx="43.7" cy="-67.1" r="13.8" fill="url(#gLd)"/><circle class="lb" style="--i:44" cx="-49" cy="-64.9" r="10.3" fill="url(#gLc)"/><circle class="lb" style="--i:8" cx="22.1" cy="-63.9" r="15.8" fill="url(#gLd)"/><circle class="lb" style="--i:19" cx="-26.2" cy="-61.8" r="16.8" fill="url(#gLc)"/><circle class="lb" style="--i:14" cx="-2.2" cy="-56.8" r="15.1" fill="url(#gLd)"/><circle class="lb" style="--i:34" cx="-39.5" cy="-55.9" r="13.1" fill="url(#gLc)"/><circle class="lb" style="--i:28" cx="26.2" cy="-53.7" r="10" fill="url(#gLd)"/><circle class="lb" style="--i:31" cx="-22.6" cy="-47.9" r="10.3" fill="url(#gLc)"/><circle class="lb" style="--i:25" cx="14.7" cy="-48.9" r="13.6" fill="url(#gLd)"/><circle class="lb" style="--i:30" cx="-5.7" cy="-45.6" r="13.9" fill="url(#gLd)"/></g><path class="fib" d="M-49.3 -131.6Q-55.9 -133.8 -57.8 -141.9M63.5 -98.4Q75.5 -103 88 -95.3M-48.6 -59.7Q-56.1 -51.3 -66.5 -46.4M-59.2 -75.4Q-73 -78.1 -78.5 -59.8M0.1 -152.4Q-1.7 -158.6 1.9 -164.8M-63.1 -89.3Q-70.2 -84.8 -78.6 -91M-63.5 -95Q-73.7 -87.3 -84.3 -102.2M-2.3 -39.7Q-6.1 -33.7 0.8 -27.4M-27.7 -146.7Q-25.6 -156 -39.6 -157.5M52.7 -127.5Q62.1 -132.5 69.8 -140.2M49.4 -131.5Q54 -139 64.2 -139.6M20.2 -42.6Q28.3 -35.8 20.7 -23.7M54.5 -124.9Q66.1 -129.4 74.4 -139.2M-55.1 -124.1Q-58.9 -133.9 -72.6 -126.6M-63.5 -94.7Q-75.3 -88.2 -87.4 -100.5M-15.3 -150.7Q-14.5 -163.9 -25.3 -174.3"/></g><circle class="hit" cx="0" cy="-82" r="76"/></g></g></g></g><g class="front"></g></g><g id="tufts"></g></svg><!-- plant:end -->
+      <div class="plant-hint" id="plantHint"><i></i><span id="plantHintTxt">Touch the cotton</span></div>
+    </div>
+  </div>
+  <a class="hero-more" href="#advisor" data-jump aria-label="Scroll to the advisor"><span></span></a>
+</section>
+
+<!-- ================= ADVISOR ================= -->
+<section class="sec advisor" id="advisor" aria-labelledby="advTitle">
+  <div class="wrap">
+    <div class="adv-head">
+      <div class="adv-head-copy">
+        <h2 class="h2" id="advTitle" data-t="h1">Check a cotton leaf</h2>
+        <p class="lede" data-t="lede">Add a clear photo of one leaf. Kapas suggests what it may be, then answers your questions only from the guides loaded on this computer.</p>
+      </div>
+      <div class="adv-tools">
+        <div id="langBox" class="lang-box"></div>
+        <ul id="chips" class="chips" aria-label="Status"></ul>
+      </div>
+    </div>
+
+    <div class="adv-grid">
+      <div class="adv-left">
+        <div id="frame" class="specimen" aria-busy="false">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img id="preview" alt="" data-t-alt="photoAlt">
+          <div class="empty" id="empty">
+            <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 114 C57 102 55 93 53 85 C42 88 26 83 9 64 C25 60 36 60 45 63 C34 51 30 36 32 19 C45 29 54 43 58 58 C58 42 58 25 60 5 C62 25 62 42 62 58 C66 43 75 29 88 19 C90 36 86 51 75 63 C84 60 95 60 111 64 C94 83 78 88 67 85 C65 93 63 102 60 114Z"/><path d="M60 112 L60 14 M60 84 Q36 78 15 64 M60 84 Q84 78 105 64 M60 66 Q46 46 37 25 M60 66 Q74 46 83 25"/></svg>
+            <strong data-t="frameEmpty">Drop a leaf photo here</strong>
+            <span data-t="frameSub">or use the buttons below</span>
+          </div>
+          <div class="scan" aria-hidden="true"></div>
+          <div id="cap" class="cap hidden" data-t="checking">Checking the leaf…</div>
+        </div>
+        <input type="file" id="inCam" accept="image/*" capture="environment" hidden>
+        <input type="file" id="inFile" accept="image/*" hidden>
+        <div class="btn-row">
+          <button id="camBtn" class="btn soft" type="button"><svg width="20" height="20" aria-hidden="true"><use href="#i-cam"/></svg><span data-t="camera">Take a photo</span></button>
+          <button id="fileBtn" class="btn soft" type="button"><svg width="20" height="20" aria-hidden="true"><use href="#i-img"/></svg><span data-t="file">Choose from files</span></button>
+        </div>
+        <button id="go" class="btn primary wide" type="button" disabled data-t="check">Check this leaf</button>
+        <label id="speakRow" class="switch">
+          <input type="checkbox" id="speak"><span class="sw" aria-hidden="true"></span><span id="speakTxt"></span>
+        </label>
+        <p class="tip" data-t="tip">One leaf, flat on a plain light background, in daylight, no flash. Fill the frame and keep it sharp.</p>
+        <p id="err" class="err" role="alert"></p>
+      </div>
+
+      <div class="adv-right">
+        <div id="howMini" class="how-mini">
+          <h3 data-t="howTitle">How it works</h3>
+          <ol>
+            <li><strong data-t="how1t">Add a photo</strong><span data-t="how1d">One leaf, in daylight.</span></li>
+            <li><strong data-t="how2t">Read the result</strong><span data-t="how2d">Kapas shows its closest guesses and says plainly when it is not sure.</span></li>
+            <li><strong data-t="how3t">Ask follow-ups</strong><span data-t="how3d">Answers come only from the loaded guides, with the source named.</span></li>
+          </ol>
+        </div>
+
+        <section id="result" class="panel hidden" aria-labelledby="resTitle"></section>
+
+        <section id="chat" class="chat" aria-labelledby="chatTitle">
+          <h3 id="chatTitle" data-t="chatTitle">Ask the guide</h3>
+          <p class="fine" data-t="chatLead">Ask about cotton pests and diseases. Answers come only from the loaded guide, with the source named.</p>
+          <div id="log" class="log" role="log" aria-live="polite"></div>
+          <div id="sugg" class="sugg"></div>
+          <form id="composer" class="composer" autocomplete="off">
+            <input id="q" type="text" maxlength="1000" data-t-ph="askPh" data-t-aria="ask" placeholder="Type your question" aria-label="Ask a follow-up">
+            <button id="mic" class="mic" type="button" aria-label="Ask by voice" title="Ask by voice"><svg class="ic-mic" width="22" height="22" aria-hidden="true"><use href="#i-mic"/></svg><svg class="ic-stop" width="22" height="22" aria-hidden="true"><use href="#i-stop"/></svg></button>
+            <button id="send" class="btn primary" type="submit"><span data-t="send">Ask</span></button>
+          </form>
+          <p id="chatErr" class="err" role="alert"></p>
+        </section>
+
+        <details id="reli" class="reli hidden">
+          <summary data-t="reliTitle">What Kapas can and cannot recognise</summary>
+          <div id="reliBody"></div>
+        </details>
+      </div>
+    </div>
+    <p class="disclaimer" data-t="disclaimer">Kapas is a research prototype from a university project. It suggests; it does not diagnose. Before spraying anything, check with your Krishi Vigyan Kendra (KVK) or agriculture officer.</p>
+    <p id="sr" class="sr-only" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="sec how" id="how" aria-labelledby="howTitle">
+  <div class="wrap">
+    <h2 class="h2" id="howTitle">How Kapas decides what to say</h2>
+    <p class="lede">An advisor that always answers will sometimes be wrong. Kapas is built to hold back when the evidence is thin.</p>
+
+    <ol class="flow" id="flow">
+      <li class="flow-step">
+        <span class="flow-n" aria-hidden="true">1</span>
+        <h3>Photo in</h3>
+        <p>A large photo is shrunk in your browser, then sent to the app running on this computer.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-n" aria-hidden="true">2</span>
+        <h3>Closest guesses</h3>
+        <p>A support vector machine, trained on labelled cotton leaf photos, scores six classes. Its top guess needs <b data-live="minp">70%</b>, and that disease needs a fair record in testing, before Kapas calls it a match.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-n" aria-hidden="true">3</span>
+        <h3>Guide search</h3>
+        <p>Your question becomes a search through the CICR guide, held in a local vector database. Only passages that match go to the language model.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-n" aria-hidden="true">4</span>
+        <h3>Answer and sources</h3>
+        <p>The answer names the guide documents it came from. If nothing in the guide fits, Kapas says so instead of guessing.</p>
+      </li>
+    </ol>
+
+    <h3 class="h3 outcomes-h">Three ways Kapas can answer</h3>
+    <div class="outcomes">
+      <div class="outcome o-ok">
+        <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="9.500" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.500 12.500l3 3 6-6.500" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>A possible match</h4>
+        <p>The top guess clears the threshold. Kapas shows it, the test score for that disease, and what the guide says.</p>
+      </div>
+      <div class="outcome o-unsure">
+        <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="9.500" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.500 9.500a2.700 2.700 0 0 1 5.200.9c0 1.800-2.700 2.300-2.700 4M12 17.600v.1" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>Not sure</h4>
+        <p>The score is low, or the model has a weak record on that disease. Kapas says it is not sure and points you to your agriculture officer.</p>
+      </div>
+      <div class="outcome o-none">
+        <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="9.500" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18L18 6" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"/></svg>
+        <h4>Nothing found</h4>
+        <p>No passage in the guide fits the question. Kapas says that. Only if the internet lookup is on may it add a web answer, clearly labelled.</p>
+      </div>
+    </div>
+
+    <dl class="stack">
+      <div><dt>Language model</dt><dd>Llama 3.1 8B, run locally through Ollama</dd></div>
+      <div><dt>Guide search</dt><dd>ChromaDB with nomic-embed-text embeddings</dd></div>
+      <div><dt>Speech</dt><dd>faster-whisper listens, Piper speaks</dd></div>
+      <div><dt>Languages</dt><dd>English and Hindi, typed or spoken</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= COTTON ================= -->
+<section class="sec cotton" id="cotton" aria-labelledby="cotTitle">
+  <div class="wrap">
+    <h2 class="h2" id="cotTitle">The crop behind the cloth</h2>
+    <p class="lede">Cotton is the world’s leading natural fibre, grown in more than 70 countries. China, India, Brazil, the United States and Pakistan lead production.</p>
+
+    <div class="cot-grid" id="cotBars">
+      <figure class="stat">
+        <figcaption><b>India has more land under cotton than any other country:</b> 11.36 million of the world’s 29.84 million hectares.</figcaption>
+        <div class="meter" role="img" aria-label="India 11.36 million hectares out of 29.84 million world total, about 38 percent">
+          <span class="m-fill" style="--w:38%"></span>
+          <span class="m-lab m-l">India, 11.36 M ha</span><span class="m-lab m-r">World, 29.84 M ha</span>
+        </div>
+      </figure>
+      <figure class="stat">
+        <figcaption><b>Each hectare gives less:</b> 448 kg of lint, against a world average of 834 kg.</figcaption>
+        <div class="meter two" role="img" aria-label="India 448 kilograms of lint per hectare, world average 834">
+          <span class="m-fill" style="--w:54%"></span>
+          <span class="m-lab m-l">India, 448 kg per ha</span><span class="m-lab m-r">World, 834 kg per ha</span>
+        </div>
+        <p class="src">ICAC 2025, as quoted in the CICR guide</p>
+      </figure>
+    </div>
+    <p class="cot-note">Pests, diseases and weather all pull yield down. That is why advice a farmer can trace to a source matters.</p>
+
+    <div class="cot-cols">
+      <div>
+        <h3 class="h3">Four species, all grown in India</h3>
+        <dl class="species">
+          <div><dt><i>Gossypium hirsutum</i></dt><dd>Upland cotton. Over 90% of the world’s cotton fibre.</dd></div>
+          <div><dt><i>G. arboreum</i></dt><dd>Desi, or Asian, cotton.</dd></div>
+          <div><dt><i>G. herbaceum</i></dt><dd>Levant cotton.</dd></div>
+          <div><dt><i>G. barbadense</i></dt><dd>Sea Island cotton.</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3 class="h3">Bt cotton</h3>
+        <p>Bt cotton reached Indian fields as Bollgard in 2002 and Bollgard II in 2006. It now covers over 95% of the country’s cotton area, which has shifted which pests matter most.</p>
+        <p class="src">Source for this section: ICAR-CICR guide, introduction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEASONS ================= -->
+<section class="sec season" id="season" aria-labelledby="seaTitle">
+  <div class="wrap">
+    <h2 class="h2" id="seaTitle">When each disease strikes</h2>
+    <p class="lede">Cotton is sown at different times across India’s three zones, and its main diseases change with the zone and the plant’s age. This chart redraws the guide’s risk tables (Tables 7 to 9). Select a disease to read about it.</p>
+
+    <div class="zone-tabs" role="tablist" aria-label="Cotton zone" id="zoneTabs"></div>
+    <p class="zone-info" id="zoneInfo" aria-live="polite"></p>
+
+    <div class="heat-wrap" role="region" aria-label="Disease risk by crop stage" tabindex="0">
+      <table class="heat" id="heat"></table>
+    </div>
+    <ul class="legend" aria-label="Risk key">
+      <li><i class="lv lv-L"></i>Low or minor</li>
+      <li><i class="lv lv-M"></i>Moderate</li>
+      <li><i class="lv lv-H"></i>High or major</li>
+      <li><i class="lv lv-0"></i>Not listed for that stage</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= HISTORY ================= -->
+<section class="sec history" id="history" aria-labelledby="hisTitle">
+  <div class="wrap">
+    <div class="his-grid">
+      <div class="his-head">
+        <h2 class="h2" id="hisTitle">Cotton has been spun for at least 7,000 years</h2>
+        <p class="lede">From a copper bead in Balochistan to a guide published this year, the story of cotton is largely a story of the Indian subcontinent.</p>
+      </div>
+      <ol class="tline" id="tl"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DISEASES ================= -->
+<section class="sec diseases" id="diseases" aria-labelledby="disTitle">
+  <div class="wrap">
+    <h2 class="h2" id="disTitle">Cotton diseases from the guide</h2>
+    <p class="lede">Select a disease to jump to its entry. Four of them can also be suggested by the photo check, and are marked. Sprays and doses are left out here on purpose: ask Kapas, which reads them from the guide and names the page.</p>
+
+    <div class="filters" id="filters" role="group" aria-label="Filter diseases"></div>
+    <ul class="tiles" id="tiles"></ul>
+
+    <div class="dis-layout">
+      <nav class="spy" id="spy" aria-label="Diseases"></nav>
+      <div class="dis-list" id="disList"></div>
+    </div>
+    <p class="dis-foot">The guide also lists Verticillium wilt, Helminthosporium leaf spot, Cercospora leaf spot and Phomopsis leaf spot as minor diseases in some zones. Illustrations are simple drawings, not photographs.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <a class="brand" href="#hero" aria-label="Kapas, back to the top">
+        <svg class="logo" width="42" height="42" aria-hidden="true"><use href="#logo"/></svg>
+        <span class="wm" aria-hidden="true"><i style="--n:0">K</i><i style="--n:1">a</i><i style="--n:2">p</i><i style="--n:3">a</i><i style="--n:4">s</i></span><span class="wm-hi" lang="hi" aria-hidden="true">कपास</span>
+      </a>
+      <p>A final-year B.Tech project at Delhi Technological University, Department of Computer Science and Engineering, by Moksh Kumar. “Hybrid Machine Learning Approaches to Detect Cotton Crop Diseases.”</p>
+      <p class="foot-warn">Kapas suggests; it does not diagnose. Before spraying anything, check with your Krishi Vigyan Kendra (KVK) or agriculture officer.</p>
+    </div>
+    <div class="foot-col">
+      <h3>Sections</h3>
+      <ul>
+        <li><a href="#advisor">Advisor</a></li><li><a href="#how">How it works</a></li><li><a href="#cotton">Cotton</a></li>
+        <li><a href="#season">Seasons</a></li><li><a href="#history">History</a></li><li><a href="#diseases">Diseases</a></li>
+        <li><a href="legacy" id="legacyLink">Original voice assistant page</a></li>
+      </ul>
+    </div>
+    <div class="foot-col foot-src">
+      <h3>Sources</h3>
+      <ul>
+        <li>Disease, zone and yield facts: Nagrare V.S. et al. (2026), <i>Integrated Management of Cotton Pests, Diseases and Nematodes</i>, ICAR-Central Institute for Cotton Research, Nagpur.</li>
+        <li>Domestication and early use: Wikipedia, “Cotton”; Wikipedia and harappa.com on Mehrgarh and Mohenjo-daro; PMC5317056 (“at least 7000 years”).</li>
+        <li>Dhaka muslin, khadi and mechanisation: Wikipedia, “Dhaka muslin” and “Khadi”.</li>
+        <li>Country shares of production: FAOSTAT 2022, via Wikipedia.</li>
+      </ul>
+      <p class="foot-type">Type: Gloock and Instrument Sans, under the SIL Open Font License.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="kapas-data.js"></script>
+<script src="kapas.js"></script>
+</body>
+</html>

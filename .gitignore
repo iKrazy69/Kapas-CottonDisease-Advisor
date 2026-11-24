@@ -1,0 +1,52 @@
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Secrets (database password, Flask secret key)
+.env
+.env.*
+
+# Local backups and rebuildable search databases
+_pre_*/
+chroma_data*/
+
+# Runtime output
+uploads/
+audio_output/
+logs/
+*.log
+*.wav
+*.mp3
+
+# Voice models are downloaded separately (see backend/tts_models/README.md)
+backend/tts_models/*
+!backend/tts_models/README.md
+
+# The CICR guide belongs to ICAR-CICR and is not redistributed here (see documents/README.md).
+# The older VB-GRAMG documents live in the earlier project's repository.
+documents/*
+!documents/README.md
+
+# Raw benchmark runs hold long passages of the guide; only the summaries are published
+eval/results/*
+!eval/results/final/
+!eval/results/cutoff_calibration.md
+!eval/results/cutoff_calibration.json
+eval/results/final/rating_sheet*.csv
+eval/results/final/rating_key*.csv
+
+# Old VB-GRAMG scripts and scratch files
+evaluate_system.py
+mic_check.py
+tempCodeRunnerFile.py
+
+# Editor and OS clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

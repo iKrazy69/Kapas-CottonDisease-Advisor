@@ -1,0 +1,126 @@
+{
+  "class_names": [
+    "Anthracnose",
+    "Bacterial leaf blight",
+    "Cotton leaf curl virus disease",
+    "Healthy Plants",
+    "Myrothecium leaf spot",
+    "Sooty mould disease"
+  ],
+  "n_train": 368,
+  "n_test": 81,
+  "accuracy": 0.8024691358024691,
+  "macro_f1": 0.5600472813238772,
+  "accuracy_model_predict": 0.8024691358024691,
+  "macro_f1_model_predict": 0.5600472813238772,
+  "per_class": {
+    "Anthracnose": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 2
+    },
+    "Bacterial leaf blight": {
+      "precision": 0.84,
+      "recall": 0.9545454545454546,
+      "f1": 0.8936170212765958,
+      "support": 44
+    },
+    "Cotton leaf curl virus disease": {
+      "precision": 0.8571428571428571,
+      "recall": 0.75,
+      "f1": 0.7999999999999999,
+      "support": 16
+    },
+    "Healthy Plants": {
+      "precision": 0.5,
+      "recall": 0.25,
+      "f1": 0.3333333333333333,
+      "support": 4
+    },
+    "Myrothecium leaf spot": {
+      "precision": 0.8333333333333334,
+      "recall": 0.5555555555555556,
+      "f1": 0.6666666666666667,
+      "support": 9
+    },
+    "Sooty mould disease": {
+      "precision": 0.5555555555555556,
+      "recall": 0.8333333333333334,
+      "f1": 0.6666666666666667,
+      "support": 6
+    }
+  },
+  "threshold_table": [
+    {
+      "threshold": 0.0,
+      "answered_fraction": 1.0,
+      "accuracy_when_answered": 0.8024691358024691
+    },
+    {
+      "threshold": 0.3,
+      "answered_fraction": 1.0,
+      "accuracy_when_answered": 0.8024691358024691
+    },
+    {
+      "threshold": 0.4,
+      "answered_fraction": 0.9629629629629629,
+      "accuracy_when_answered": 0.8333333333333334
+    },
+    {
+      "threshold": 0.5,
+      "answered_fraction": 0.8888888888888888,
+      "accuracy_when_answered": 0.8333333333333334
+    },
+    {
+      "threshold": 0.6,
+      "answered_fraction": 0.7283950617283951,
+      "accuracy_when_answered": 0.847457627118644
+    },
+    {
+      "threshold": 0.7,
+      "answered_fraction": 0.6419753086419753,
+      "accuracy_when_answered": 0.9038461538461539
+    },
+    {
+      "threshold": 0.8,
+      "answered_fraction": 0.4567901234567901,
+      "accuracy_when_answered": 0.9459459459459459
+    }
+  ],
+  "svm_params": {
+    "estimator__C": "10",
+    "estimator__gamma": "auto"
+  },
+  "sklearn_version": "1.3.2",
+  "seed": 42,
+  "data_filters": {
+    "dedupe_within": true,
+    "exclude_ambiguous": true,
+    "counts_before": {
+      "Anthracnose": 11,
+      "Bacterial leaf blight": 301,
+      "Boll rot disease": 35,
+      "Cotton leaf curl virus disease": 105,
+      "Healthy Plants": 26,
+      "Myrothecium leaf spot": 61,
+      "Root rot disease": 35,
+      "Sooty mould disease": 40
+    },
+    "removed_within_class_duplicates": 7,
+    "removed_ambiguous": 70,
+    "dropped_classes": [
+      "Boll rot disease",
+      "Root rot disease"
+    ],
+    "counts_after": {
+      "Anthracnose": 11,
+      "Bacterial leaf blight": 294,
+      "Cotton leaf curl virus disease": 105,
+      "Healthy Plants": 26,
+      "Myrothecium leaf spot": 61,
+      "Sooty mould disease": 40
+    }
+  },
+  "majority_baseline": 0.5432098765432098
+}

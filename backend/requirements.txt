@@ -1,0 +1,42 @@
+# Pinned to the versions installed in the working venv (checked from its
+# *.dist-info folders). Unused packages from the old file were removed:
+# nothing in the backend imports MySQL/SQLAlchemy/sentence-transformers/
+# gunicorn/Flask-CORS (CORS is set manually in app.py)/python-dotenv/dateutil.
+# Needs Python 3.9, 3.10 or 3.11 (numpy 1.24.3 has no wheels for 3.12 or newer).
+
+# ========== WEB ==========
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# ========== VECTOR DATABASE ==========
+chromadb==0.4.10
+
+# ========== SPEECH-TO-TEXT ==========
+faster-whisper==1.2.1
+ctranslate2==4.8.0
+
+# ========== TEXT-TO-SPEECH ==========
+# tts_piper.py calls voice.synthesize_wav(); the old pin (1.2.0) did not match
+# the 1.4.2 that is actually installed.
+piper-tts==1.4.2
+
+# ========== LLM ==========
+ollama==0.1.0
+requests==2.31.0
+
+# ========== AUDIO ==========
+sounddevice==0.4.6
+scipy==1.11.3
+numpy==1.24.3
+
+# ========== DOCUMENTS ==========
+PyPDF2==3.0.1
+python-docx==0.8.11
+
+# ========== COTTON DISEASE CLASSIFIER (backend/cotton/) ==========
+# Exact versions of the working setup (read from its installed packages on 23 Nov 2026).
+# scikit-learn must stay at 1.3.2: the saved model file (backend/cotton/models/cotton_svm.joblib) was made with it.
+opencv-python-headless==4.9.0.80
+scikit-image==0.22.0
+scikit-learn==1.3.2
+joblib==1.5.3
