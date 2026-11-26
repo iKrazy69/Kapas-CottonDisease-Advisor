@@ -22,6 +22,10 @@ UNCERTAIN_MESSAGE = ("I could not identify the disease reliably from this photo,
 HEALTHY_MESSAGE = ("The photo looks healthy to the model, but this is not a guarantee. "
                    "If the plant still looks unwell, ask your agriculture officer.")
 
+NOT_COTTON_MESSAGE = ("This does not look like a cotton leaf, so I am not giving a diagnosis. Kapas only "
+                      "checks cotton leaves. Please take a photo of one cotton leaf, in daylight, filling "
+                      "the frame. If it is a cotton leaf, try again closer and in focus.")
+
 # Unicode blocks -> language code. Devanagari is shared by Hindi and Marathi,
 # so it maps to 'hi' unless the caller says otherwise.
 SCRIPT_RANGES = [

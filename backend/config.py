@@ -84,8 +84,14 @@ class Config:
     # COTTON DISEASE CLASSIFIER (backend/cotton/)
     # ========================================
 
+    # 'v2' (26 Nov 2026): ConvNeXt features + cotton/not-cotton gate + multi-dataset disease model
+    # (eval/cotton_v2/, results in eval/results/cotton_v2/report.md). 'v1': the BTP notebook's SVM.
+    # v2 falls back to v1 if its model file is missing.
+    COTTON_MODEL_VERSION = 'v2'
     COTTON_MODEL_PATH = os.path.join(BASE_DIR, 'backend', 'cotton', 'models', 'cotton_svm.joblib')
     COTTON_METRICS_PATH = os.path.join(BASE_DIR, 'backend', 'cotton', 'models', 'metrics.json')
+    COTTON_V2_MODEL_PATH = os.path.join(BASE_DIR, 'backend', 'cotton', 'models', 'cotton_v2.joblib')
+    COTTON_V2_METRICS_PATH = os.path.join(BASE_DIR, 'backend', 'cotton', 'models', 'metrics_v2.json')
     # A prediction is only treated as a diagnosis if its top probability is at
     # least this. UNCALIBRATED PLACEHOLDER: after running train_classifier.py,
     # read the "threshold / accuracy-when-answered" table it prints and pick

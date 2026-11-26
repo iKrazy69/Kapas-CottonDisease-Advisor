@@ -40,3 +40,9 @@ opencv-python-headless==4.9.0.80
 scikit-image==0.22.0
 scikit-learn==1.3.2
 joblib==1.5.3
+# v2 classifier (26 Nov 2026): frozen ConvNeXt-Tiny + CLIP features (backend/cotton/embedder.py).
+# The network weights are downloaded separately: see backend/cotton/models/README.md.
+pillow==11.3.0
+torch==2.8.0
+torchvision==0.23.0
+transformers==4.57.6

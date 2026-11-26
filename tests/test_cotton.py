@@ -51,6 +51,7 @@ for name,attrs in {'rag_engine':{'RAGEngine':FakeRAG},
 sys.path.insert(0,BACK)
 from config import Config
 Config.COTTON_MODEL_PATH=MODELS+'/cotton_svm.joblib'; Config.COTTON_METRICS_PATH=MODELS+'/metrics.json'
+Config.COTTON_MODEL_VERSION='v1'   # these checks use the synthetic SVM above; v2 has tests/test_cotton_v2.py
 import app as A
 import translator, requests
 Config.UPLOAD_FOLDER=tempfile.mkdtemp(); A.app.config['UPLOAD_FOLDER']=Config.UPLOAD_FOLDER

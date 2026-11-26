@@ -37,7 +37,7 @@ const DISEASES = [
   q:{signs:'What are the signs of root rot in cotton?', manage:'How can I manage root rot in cotton?'}
 },
 {
-  id:'fusarium-wilt', name:'Fusarium wilt', group:'roots', kind:'Fungal, soil-borne',
+  id:'fusarium-wilt', name:'Fusarium wilt', group:'roots', kind:'Fungal, soil-borne', photo:'Fusarium wilt',
   cause:['Fusarium oxysporum f. sp. vasinfectum'],
   blurb:'A wilt fungus that blocks the plant’s water vessels. Cut the stem and look for a dark ring.',
   signs:[
@@ -99,7 +99,7 @@ const DISEASES = [
   q:{signs:'What are the signs of fungal boll rot in cotton?', manage:'How can I manage fungal boll rot in cotton?'}
 },
 {
-  id:'target-spot', name:'Target spot', group:'leaf', kind:'Fungal',
+  id:'target-spot', name:'Target spot', group:'leaf', kind:'Fungal', photo:'Target spot',
   cause:['Corynespora cassiicola'],
   blurb:'Round brown spots with rings that merge, and make leaves drop early.',
   signs:[
@@ -119,7 +119,7 @@ const DISEASES = [
   q:{signs:'What are the signs of target spot in cotton?', manage:'How can I manage target spot in cotton?'}
 },
 {
-  id:'alternaria', name:'Alternaria leaf spot', group:'leaf', kind:'Fungal',
+  id:'alternaria', name:'Alternaria leaf spot', group:'leaf', kind:'Fungal', photo:'Alternaria leaf spot',
   cause:['Alternaria macrospora','Alternaria alternata','Alternaria gossypina'],
   blurb:'Brown spots with purple edges and cracked centres, mostly on older, lower leaves.',
   signs:[

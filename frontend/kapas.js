@@ -27,8 +27,10 @@ en:{
   how1t:'Add a photo', how1d:'One leaf, in daylight.',
   how2t:'Read the result', how2d:'Kapas shows its closest guesses and says plainly when it is not sure.',
   how3t:'Ask follow-ups', how3d:'Answers come only from the loaded guides, with the source named.',
-  vMatch:'Possible match', vHealthy:'Looks healthy', vUnsure:'Not sure',
+  vMatch:'Possible match', vHealthy:'Looks healthy', vUnsure:'Not sure', vNotCotton:'Not a cotton leaf',
   unsureTitle:'Not sure about this leaf', healthyTitle:'No disease spotted',
+  notCottonTitle:'This does not look like a cotton leaf',
+  notCottonNote:'Kapas only checks cotton leaves, so it has not named any disease.',
   gaugeLabel:'model score', gaugeMin:'{min}% needed',
   gaugeNote:'The model needs at least {min}% to call a match. The score shows how strongly it leans, not the chance that it is right.',
   guesses:'Closest guesses', testScore:'Test score for this disease',
@@ -56,7 +58,7 @@ en:{
   reliTitle:'What Kapas can and cannot recognise',
   reliLead:'Test score for each disease (1.00 is perfect). The gold mark is the minimum, {f1}, a disease needs before it can be shown as a match. Diseases not listed here are not recognised at all.',
   reliBelow:'Never shown as a match',
-  reliAcc:'Overall test accuracy {a}%, average score across diseases {m}. The test set is small, so treat these as rough.',
+  reliAcc:'Overall test accuracy {a}%, average score across diseases {m}, on photos like the ones it learned from. On photos from a new camera or field it does worse, so treat these as the best case.',
   disclaimer:'Kapas is a research prototype from a university project. It suggests; it does not diagnose. Before spraying anything, check with your Krishi Vigyan Kendra (KVK) or agriculture officer.',
   errNet:'Could not reach the server. Check that the app is running, then try again.',
   errBig:'That photo is too large. Try a smaller one.',
@@ -79,8 +81,10 @@ hi:{
   how1t:'फ़ोटो जोड़ें', how1d:'एक पत्ती, दिन की रोशनी में।',
   how2t:'नतीजा देखें', how2d:'कपास अपने सबसे नज़दीकी अनुमान दिखाता है और पक्का न होने पर साफ़ कहता है।',
   how3t:'आगे पूछें', how3d:'जवाब सिर्फ़ लोड किए गए दस्तावेज़ों से आते हैं, स्रोत के नाम के साथ।',
-  vMatch:'संभावित रोग', vHealthy:'पत्ती स्वस्थ दिखती है', vUnsure:'पक्का नहीं',
+  vMatch:'संभावित रोग', vHealthy:'पत्ती स्वस्थ दिखती है', vUnsure:'पक्का नहीं', vNotCotton:'कपास की पत्ती नहीं',
   unsureTitle:'इस पत्ती के बारे में पक्का नहीं', healthyTitle:'कोई रोग नहीं दिखा',
+  notCottonTitle:'यह कपास की पत्ती नहीं लगती',
+  notCottonNote:'कपास सिर्फ़ कपास की पत्तियाँ जाँचता है, इसलिए कोई रोग नहीं बताया गया।',
   gaugeLabel:'मॉडल स्कोर', gaugeMin:'{min}% ज़रूरी',
   gaugeNote:'अनुमान मानने के लिए मॉडल को कम से कम {min}% चाहिए। स्कोर बताता है कि मॉडल कितना झुका है, सही होने की संभावना नहीं।',
   guesses:'सबसे नज़दीकी अनुमान', testScore:'इस रोग के लिए जाँच-स्कोर',
@@ -108,7 +112,7 @@ hi:{
   reliTitle:'कपास क्या पहचान सकता है और क्या नहीं',
   reliLead:'हर रोग का जाँच-स्कोर (1.00 सबसे अच्छा)। सुनहरा निशान न्यूनतम स्कोर {f1} है, जो किसी रोग को अनुमान की तरह दिखाने के लिए चाहिए। जो रोग यहाँ नहीं हैं, वे बिल्कुल नहीं पहचाने जाते।',
   reliBelow:'अनुमान की तरह कभी नहीं दिखता',
-  reliAcc:'कुल जाँच-सटीकता {a}%, रोगों में औसत स्कोर {m}। जाँच-सेट छोटा है, इसलिए इन्हें मोटा अंदाज़ा समझें।',
+  reliAcc:'कुल जाँच-सटीकता {a}%, रोगों में औसत स्कोर {m}, उन जैसी फ़ोटो पर जिनसे मॉडल ने सीखा। नए कैमरे या खेत की फ़ोटो पर नतीजे कमज़ोर होते हैं, इसलिए इन्हें सबसे अच्छी स्थिति समझें।',
   disclaimer:'कपास एक विश्वविद्यालय परियोजना का शोध प्रोटोटाइप है। यह सुझाव देता है, पक्का निदान नहीं करता। कोई भी दवा छिड़कने से पहले अपने कृषि विज्ञान केंद्र (KVK) या कृषि अधिकारी से पूछ लें।',
   errNet:'सर्वर से संपर्क नहीं हो सका। देखें कि ऐप चल रहा है, फिर दोबारा कोशिश करें।',
   errBig:'यह फ़ोटो बहुत बड़ी है। छोटी फ़ोटो चुनें।',
@@ -392,17 +396,29 @@ function renderResult(animate){
   const d = L.d, dg = d.diagnosis, cfg = S.cfg || {};
   const min = typeof cfg.min_probability === 'number' ? cfg.min_probability : 0.7;
   const confident = dg.status === 'confident';
+  const notCotton = dg.status === 'not_cotton';
   const healthy = confident && /^healthy/i.test(dg.disease || '');
-  const kind = !confident ? 'unsure' : (healthy ? 'healthy' : 'match');
+  const kind = notCotton ? 'notcotton' : (!confident ? 'unsure' : (healthy ? 'healthy' : 'match'));
   const top = (dg.top3 && dg.top3[0]) ? dg.top3[0].disease : (dg.disease || '');
-  const title = kind === 'unsure' ? t('unsureTitle') : (kind === 'healthy' ? t('healthyTitle') : dg.disease);
+  const title = kind === 'notcotton' ? t('notCottonTitle') : (kind === 'unsure' ? t('unsureTitle') : (kind === 'healthy' ? t('healthyTitle') : dg.disease));
+  const warn = kind === 'unsure' || kind === 'notcotton';
 
-  box.className = 'panel ' + (kind === 'unsure' ? 'unsure' : 'ok') + (animate ? ' enter' : '');
+  box.className = 'panel ' + (warn ? 'unsure' : 'ok') + (animate ? ' enter' : '');
   box.replaceChildren();
   $('howMini').classList.add('hidden');
 
-  const pill = h('span', {class:'verdict'}); pill.innerHTML = kind === 'unsure' ? ICON.unsure : ICON.ok;
-  pill.append(document.createTextNode(t(kind === 'unsure' ? 'vUnsure' : (kind === 'healthy' ? 'vHealthy' : 'vMatch'))));
+  const pill = h('span', {class:'verdict'}); pill.innerHTML = warn ? ICON.unsure : ICON.ok;
+  pill.append(document.createTextNode(t(kind === 'notcotton' ? 'vNotCotton' : (kind === 'unsure' ? 'vUnsure' : (kind === 'healthy' ? 'vHealthy' : 'vMatch')))));
+  if(kind === 'notcotton'){
+    box.append(pill, h('div', {class:'res-head'}, h('h2', {class:'res-title', id:'resTitle', text:title})),
+      h('p', {class:'fine', text:t('notCottonNote')}));
+    if(dg.note) box.append(h('p', {class:'fine', text:dg.note}));
+    const adv0 = h('div', {class:'blk'}, h('h3', {text:t('nextTitle')}), fmtAdvice(d.advice));
+    if(L.lang !== S.lang) adv0.append(h('div', {class:'note', text:t('adviceLang', {a:NAMES[L.lang] || L.lang, b:NAMES[S.lang] || S.lang})}));
+    box.append(adv0);
+    $('sr').textContent = title;
+    return;
+  }
   const g = gaugeSvg(dg.probability, min);
   box.append(
     pill,

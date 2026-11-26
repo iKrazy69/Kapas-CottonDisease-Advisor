@@ -25,7 +25,7 @@ from translator import translate_answer, translate_to_english
 import indic_translate
 import cotton_flow
 import web_lookup
-from cotton_classifier import CottonClassifier, CottonClassifierUnavailable
+from cotton_classifier import CottonClassifierUnavailable, load_cotton_classifier
 
 from tts_piper import save_audio_file
 from flask import send_from_directory
@@ -76,7 +76,7 @@ except Exception as e:
 cotton_classifier = None
 cotton_load_error = None
 try:
-    cotton_classifier = CottonClassifier()
+    cotton_classifier = load_cotton_classifier()
 except CottonClassifierUnavailable as e:
     cotton_load_error = str(e)
     logger.warning(f'⚠️ {cotton_load_error}')
@@ -434,6 +434,8 @@ def cotton_status():
         'error': cotton_load_error,
         'min_probability': Config.COTTON_MIN_PROBABILITY,
         'min_class_f1': Config.COTTON_MIN_CLASS_F1,
+        'model_version': getattr(cotton_classifier, 'version', 1) if cotton_classifier else None,
+        'classes': list(cotton_classifier.class_names) if cotton_classifier else [],
         'text_languages': list(SUPPORTED_TEXT_LANGUAGES) + (list(indic_translate.FLORES) if Config.ENABLE_INDICTRANS else []),
         'voice_languages': ['en', 'hi'],
         'documents_loaded': rag_engine.has_documents(),
@@ -486,11 +488,14 @@ def diagnose():
 
     disease = decision['disease']
     confident = decision['status'] == 'confident'
+    not_cotton = decision['status'] == 'not_cotton'
     healthy = confident and cotton_classifier.is_healthy(disease)
 
     no_rag = {'grounded': False, 'source_documents': [], 'retrieval_score': None,
               'source_kind': 'none', 'web_sources': [], 'web_status': None}
-    if not confident:
+    if not_cotton:
+        advice_en, rag = cotton_flow.NOT_COTTON_MESSAGE, no_rag
+    elif not confident:
         advice_en, rag = cotton_flow.UNCERTAIN_MESSAGE, no_rag
     elif healthy:
         advice_en, rag = cotton_flow.HEALTHY_MESSAGE, no_rag
@@ -510,6 +515,7 @@ def diagnose():
             'probability': decision['probability'],
             'top3': decision['top3'],
             'reasons': decision['reasons'],
+            'cotton_score': decision.get('cotton_score'),
             'note': 'Automated suggestion from a small research model, not a confirmed diagnosis.',
         },
         'advice': advice,

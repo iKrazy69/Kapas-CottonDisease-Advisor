@@ -50,3 +50,9 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Pretrained image networks for the v2 cotton classifier: downloaded separately (backend/cotton/models/README.md)
+backend/cotton/models/backbone/
+backend/cotton/models/clip-vit-base-patch16/
+backend/cotton/models/cotton_v2.joblib
+backend/cotton/models/metrics_v2.json
